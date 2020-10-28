@@ -78,19 +78,19 @@
 <select id="getLikeStore1" parameterType="String" resultType="com.hk.saeyan.dto.MemberLikeStores">
 	SELECT m.NAME , m.ID , m.LIKESTORE1 , s.SNAME , s.SNUM , s.SCONTACT
 	FROM MEMBERS m , STORES s 
-	WHERE m.LIKESTORE1 = s.SNUM AND ID=#{id} 
+	WHERE m.LIKESTORE1 = s.SNUM AND m.ID=#{id} 
 </select>
 
 <select id="getLikeStore2" parameterType="String" resultType="com.hk.saeyan.dto.MemberLikeStores">
 	SELECT m.NAME , m.ID , m.LIKESTORE2 , s.SNAME , s.SNUM , s.SCONTACT
 	FROM MEMBERS m , STORES s 
-	WHERE m.LIKESTORE2 = s.SNUM AND ID=#{id}
+	WHERE m.LIKESTORE2 = s.SNUM AND m.ID=#{id}
 </select>
 
 <select id="getLikeStore3" parameterType="String" resultType="com.hk.saeyan.dto.MemberLikeStores">
 	SELECT m.NAME , m.ID , m.LIKESTORE3 , s.SNAME , s.SNUM , s.SCONTACT
 	FROM MEMBERS m , STORES s 
-	WHERE m.LIKESTORE3 = s.SNUM AND ID=#{id}
+	WHERE m.LIKESTORE3 = s.SNUM AND m.ID=#{id}
 </select>
 </mapper>
 	
