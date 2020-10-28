@@ -256,6 +256,14 @@ public class AdminController {
 			return "/admin/assetOne";
 		}
 		
+		@GetMapping("/account")
+		public String accountList(Model model) {
+			System.out.println("account....호출...");
+			model.addAttribute("account",adminService.accountList());
+			System.out.println(adminService.accountList().toString());
+			return "/admin/accountList";
+		}
+		
 		
 		//--------------chat---------------------------------------------------------------------------------------------------------------------------------------------
 

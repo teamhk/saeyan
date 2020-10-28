@@ -9,6 +9,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import com.hk.saeyan.dto.Account;
 import com.hk.saeyan.dto.Asset;
 import com.hk.saeyan.dto.Chat;
 import com.hk.saeyan.dto.ChatComment;
@@ -20,6 +21,7 @@ import com.hk.saeyan.dto.SearchCriteria;
 import com.hk.saeyan.dto.StatisticDay;
 import com.hk.saeyan.dto.StoreInfo;
 import com.hk.saeyan.dto.Stores;
+import com.hk.saeyan.dto.StoresAsset;
 import com.hk.saeyan.dto.UserInfo;
 import com.hk.saeyan.mapper.AdminMapper;
 
@@ -145,8 +147,35 @@ public class AdminService {
 		return adminMapper.assetAcheck();
 	}
 	
+	@Transactional
 	public int assetAcheckPost(String asset_seq,String a_check) {
-		return adminMapper.assetAcheckPost(asset_seq,a_check);
+		TransactionStatus txStatus = transactionManager.getTransaction(new DefaultTransactionDefinition());
+		StoresAsset storesAsset = new StoresAsset();
+		Account account = new Account();
+		adminMapper.assetAcheckPost(asset_seq,a_check);
+		if(a_check.equals("Y")) {
+			try {
+				storesAsset = adminMapper.selectIdPrice(asset_seq);
+				account = adminMapper.selectBalanceSeq();
+			} catch (Exception e) {
+				transactionManager.rollback(txStatus);
+				return 0;
+			}
+			transactionManager.commit(txStatus);
+		    			
+			account.setId(storesAsset.getId());
+			account.setO_price(storesAsset.getA_price());
+			
+			if(storesAsset!=null&&account!=null) {
+				adminMapper.assetAddAccount(account);
+				return 1;
+			}
+		}
+		return 1;
+	}
+	
+	public List<Account> accountList(){
+		return adminMapper.accountList();
 	}
 	
 	

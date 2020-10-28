@@ -57,18 +57,20 @@ function acheck(){
 		success : function(data){
 		var str = "";
 		str += '<table border="1">';
-		str += '<tr><td>번호</td>	<td>사업자번호</td>	<td>업체명</td><td>정산시작기간</td><td>정산끝기간</td><td>정산날짜</td><td>정산여부</td></tr>';
+		str += '<tr><td>번호</td>	<td>사업자번호</td>	<td>업체명</td><td>정산시작기간</td><td>정산끝기간</td><td>정산금액</td><td>정산여부</td></tr>';
 		for(var i in data){
 		str += '<tr><td>'+data[i].asset_seq+'</td>';
 		str += '<td>'+data[i].snum+'</td>';
 		str += '<td>'+data[i].sname+'</td>';
 		str += '<td>'+data[i].periodStart+'</td>';
 		str += '<td>'+data[i].periodEnd+'</td>';
-			if(data[i].a_date==null){
-				str += '<td></td>';
-			} else {
-				str += '<td>'+data[i].a_date+'</td>';
-			}
+		str += '<td>'+data[i].a_price+'</td>';
+		
+// 			if(data[i].a_date==null){
+// 				str += '<td></td>';
+// 			} else {
+// 				str += '<td>'+data[i].a_date+'</td>';
+// 			}
 		str += '<td><select  name="'+data[i].asset_seq+'">';
 		str += '<option value="N">N</option><option value="Y">Y</option></select></td>';
 		}

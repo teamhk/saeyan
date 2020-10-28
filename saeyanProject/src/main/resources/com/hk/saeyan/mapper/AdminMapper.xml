@@ -112,6 +112,22 @@
    <update id="assetAcheckPost">
       UPDATE ASSET SET A_CHECK=#{a_check},A_DATE=sysdate WHERE ASSET_SEQ=#{asset_seq}
    </update>
+   
+   <select id="selectIdPrice" resultType="com.hk.saeyan.dto.StoresAsset">
+   	  SELECT s.ID,a.A_PRICE FROM ASSET a ,STORES s WHERE a.SNUM = s.SNUM AND ASSET_SEQ = #{asset_seq}
+   </select>
+   
+   <select id="selectBalanceSeq" resultType="com.hk.saeyan.dto.Account">
+      SELECT BALANCE , A_SEQ FROM (SELECT * FROM ACCOUNT a ORDER BY A_SEQ DESC) WHERE ROWNUM =1
+   </select>
+   
+   <insert id="assetAddAccount">
+   	  INSERT INTO ACCOUNT (BALANCE, A_DATE, I_PRICE, DETAIL, ID, O_PRICE, A_SEQ) VALUES(#{balance}-#{o_price}, sysdate, 0, '업체결산', #{id}, #{o_price}, #{a_seq}+1)
+   </insert>
+   
+   <select id="accountList" resultType="com.hk.saeyan.dto.Account">
+	  SELECT BALANCE, A_DATE, I_PRICE, DETAIL, ID, O_PRICE, A_SEQ FROM ACCOUNT ORDER BY A_SEQ
+   </select>
 	
 	<!-- 게시물 작성 -->
 	

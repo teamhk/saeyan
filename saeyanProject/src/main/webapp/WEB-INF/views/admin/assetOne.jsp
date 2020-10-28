@@ -19,6 +19,7 @@
 		<td>정산시작기간</td>
 		<td>정산끝기간</td>
 		<td>정산날짜</td>
+		<td>정산금액</td>
 		<td>정산여부</td>
 	</tr>
 	<c:forEach items="${asset}" var="one"> <!-- 반복문으로 tr,td생성 -->
@@ -29,6 +30,7 @@
 		<td>${one.periodStart }</td>
 		<td>${one.periodEnd }"</td>
 		<td>${one.a_date }"</td>
+		<td>${one.a_price }</td>
 		<td>${one.a_check }</td>
 		</tr>
 	</c:forEach>

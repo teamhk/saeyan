@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.hk.saeyan.dto.Account;
 import com.hk.saeyan.dto.Asset;
 import com.hk.saeyan.dto.Chat;
 import com.hk.saeyan.dto.ChatComment;
@@ -15,6 +16,7 @@ import com.hk.saeyan.dto.SearchCriteria;
 import com.hk.saeyan.dto.StatisticDay;
 import com.hk.saeyan.dto.StoreInfo;
 import com.hk.saeyan.dto.Stores;
+import com.hk.saeyan.dto.StoresAsset;
 import com.hk.saeyan.dto.UserInfo;
 
 @Repository
@@ -61,6 +63,15 @@ public interface AdminMapper {
 	public List<Asset> assetAcheck(); // 미정산 업체 가져오기
 	
 	public int assetAcheckPost(@Param("asset_seq") String asset_seq,@Param("a_check") String a_check); // 정산 상태 변경
+	
+	public StoresAsset selectIdPrice(@Param("asset_seq") String asset_seq); // 정산용 id와 price를 가져옴
+	
+	public Account selectBalanceSeq(); //마지막 seq와 balance값 가져오기
+
+	public int assetAddAccount(Account account); //관리자 자산내역에 정산내역 넣기
+	
+	public List<Account> accountList(); //관리자 자산 리스트 가져오기
+	
 	
 	//  admin chat 1013 james--------------------------------------------------------------------------------------------------------------------------------
 
