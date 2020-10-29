@@ -297,7 +297,7 @@ font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif
 </head>
 
 <body>
-	<%@ include file="../include/header.jsp"%>
+	<%@ include file="../include/headerReal.jsp" %>
 
 	<div class="section fp-section active fp-table fp-completely">
 		<section class="background">
