@@ -1,13 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
-<head>
+<%@ include file="../include/headerReal.jsp" %>
 <meta name="viewport" content="width=device-width, initial-scale=0">
-<meta name="csrf-param" content="authenticity_token">
-<meta name="csrf-token"
-	content="Wbrkri4s2Or+fG7nf+QSPzyGuQrPT9UKdzsTG5Dh7Wgr5e0a+kk4U7GLFVW/klB9RHNYwEUN25WuCW0ToH+qsg==">
 <link rel="stylesheet" media="screen"
 	href="https://static.codepen.io/assets/fullpage/fullpage-4de243a40619a967c0bf13b95e1ac6f8de89d943b7fc8710de33f681fe287604.css">
 <link rel="stylesheet" media="all" href="/resources/css/main.css">
@@ -23,15 +18,6 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic,900,900italic"
 	rel="stylesheet">
-<meta property="og:image"
-	content="https://assets.codepen.io/336035/internal/screenshots/pens/qdGZJr.default.png?fit=cover&amp;format=auto&amp;ha=false&amp;height=720&amp;quality=75&amp;v=2&amp;version=1539537553&amp;width=1279"
-	itemprop="thumbnailUrl">
-<meta property="og:title" content="Full Page Parallax Scroll Effect">
-<meta property="og:url"
-	content="https://codepen.io/eehayman/details/qdGZJr">
-<meta property="og:site_name" content="CodePen">
-<meta property="og:description"
-	content="A lightweight full page parallax scroll effect....">
 <link rel="alternate" type="application/json+oembed"
 	href="https://codepen.io/api/oembed?url=https%3A%2F%2Fcodepen.io%2Feehayman%2Fpen%2FqdGZJr&amp;format=json"
 	title="Full Page Parallax Scroll Effect">
@@ -247,7 +233,7 @@ mixin transition( $time, $property: all, $easing: ease-in) {
     transform: translateY(-15%);
     
 }
-div {
+.section fp-section active fp-table fp-completely {
     display: block;
     
 }
@@ -293,11 +279,6 @@ font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif
   }
 </script>
 
-
-</head>
-
-<body>
-	<%@ include file="../include/headerReal.jsp" %>
 
 	<div class="section fp-section active fp-table fp-completely">
 		<section class="background">

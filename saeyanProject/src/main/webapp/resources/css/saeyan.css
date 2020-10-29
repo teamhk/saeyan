@@ -75,8 +75,8 @@
 
 #container .tit-area{ height:270px; background-position:50% 0; background-repeat:no-repeat; display:table; width:100%;}
 .tit-area>.inner{ display:table-cell; vertical-align:middle; }
-.tit-area h2{ text-align:center; line-height:1; padding:0 0 25px; color:#fff; font-size:50px; font-weight:normal; margin:0; background:url(../images/icon_h2_blue.png) 50% 100% no-repeat;}
-.tit-area .sub-tx{ text-align:center; margin-top:15px; font-size:20px; color:#fff;}
+.tit-area h2{ text-align:center; line-height:1; padding:0 0 25px; font-size:50px; font-weight:normal; margin:0; background:url(../images/icon_h2_blue.png) 50% 100% no-repeat;}
+.tit-area .sub-tx{ text-align:center; margin-top:15px; font-size:20px;}
 #container .brd-wr .tit-area{ height:auto; padding:60px 0; background-color:#fff;}
 #container .brd-wr .tit-area h2{ padding:0 0 25px; color:#121212; background:url(../images/icon_h2_blue.png) 50% 100% no-repeat;}
 #container .brd-wr .tit-area .sub-tx{ color:#666;}

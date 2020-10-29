@@ -14,6 +14,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" media="all" href="/resources/css/main.css">
+<link rel="stylesheet" type="text/css"  href="/resources/css/mainTotal.css">
 <link href="https://www.moduparking.com/wp-includes/css/dist/block-library/style.min.css?ver=5.1.1" rel="stylesheet">
 <link href="https://www.moduparking.com/wp-content/plugins/appbanners/lib/smartbanner/jquery.smartbanner.min.css?ver=5.1.1" rel="stylesheet">
 <link href="https://www.moduparking.com/wp-content/themes/virtue/assets/css/virtue.css?ver=321" rel="stylesheet">

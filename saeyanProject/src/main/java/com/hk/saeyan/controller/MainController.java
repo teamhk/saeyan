@@ -16,6 +16,14 @@ public class MainController {
 	@Autowired
 	MainService mainService;
 	
+	@GetMapping("/use")
+	public String use() {
+		
+		
+		return "main/use";
+	}
+	
+	
 	@GetMapping("/price")
 	public String price(Product product,Model model) {
 		

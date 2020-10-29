@@ -126,6 +126,11 @@ public class SupportController {
 
 		return "redirect:/support/notice";
 	}
-
+	@GetMapping("/faq")
+	public String use() {
+		
+		
+		return "main/faq";
+	}
 
 }
