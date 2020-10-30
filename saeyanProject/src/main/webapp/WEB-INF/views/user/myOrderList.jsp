@@ -190,6 +190,11 @@
 				console.log("들어오냐22");
 	 			alert("접수완료로 환불 할 수 없습니다");
 	 			}
+
+			if($('.pro').val()==="환불완료"){
+				alert("환불이 완료된 상태입니다");
+				return false;
+			}
 			
 			else{$.ajax({
         			data: {

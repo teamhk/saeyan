@@ -29,6 +29,10 @@
 //팝업창 오픈하여 데이터 전송
 function openPopup( ) {
 
+if($('#goodsTotAmt').val()==0){
+	alert("품목을 선택해주세요")
+	return false;
+}
 
 productForm.action=" info";
 
@@ -40,8 +44,6 @@ console.log(itemname);
 console.log(itemmimi);
 for(var i=0;i<itemname.length;i++){
 	itemlist += itemname.eq(i).val()+"!@#"+itemmimi.eq(i).val()+"$%^";
-
-
 }
 console.log(itemlist);
 
@@ -50,14 +52,11 @@ $('#items').val(itemlist);
 console.log("서브밋 후반");
 console.log($('#items').val(itemlist));
 
-
-
-
-productForm.submit();
-
-
+document.productForm.submit();
 
 }
+
+
 function wrapWindowByMask() {
 	//화면의 높이와 너비를 구한다.
 	var maskHeight = $(document).height();
@@ -124,6 +123,17 @@ function popup(){
 }
 
 $(document).ready(function() {
+	//페이지 들어왔을떄 즐겨찾기 여부 확인하여 표시
+	var like1 = "${loginMember.likeStore1}";
+	var like2 = "${loginMember.likeStore2}";
+	var like3 = "${loginMember.likeStore3}";
+	
+	if(like1==${storeInfo.snum} || like2==${storeInfo.snum} || like3==${storeInfo.snum}){
+		$(".ico_bookmark").css("background-position","-120px -480px");
+	}
+	
+
+
 	//장바구니담기
 	var cartform= $("form[name='productForm']");
 	$(".ordercart").on("click",function(){
@@ -152,6 +162,10 @@ $(document).ready(function() {
 	});
 	$(".link_bookmark").on("click", function(){
 		var id = '${loginMember.id}'
+		if(id==""){
+			alert("로그인 해주세요");
+			return false;
+		}
 		var snum = ${storeInfo.snum}
 		console.log("id는", id);
 		console.log("snum은", snum);
@@ -166,8 +180,10 @@ $(document).ready(function() {
 			success : function(data){
 				if(data==0){
 					alert("관심점포에 등록되었습니다.");
+					$(".ico_bookmark").css("background-position","-120px -480px");
 				} else if (data==1){
 					alert("관심점포가 해제되었습니다.");
+					$(".ico_bookmark").css("background-position","-100px -480px");
 				} else {
 					alert ("관심점포는 최대 3개까지만 등록 가능합니다.");
 				}
@@ -459,7 +475,7 @@ $(document).ready(function() {
 			</h1>
 			<div data-viewid="header" data-root="" class="search_map">
 				<h2 class="screen_out">검색</h2>
-				<form id="searchForm" method="GET">
+				<form id="searchForm" name="searchForm" method="GET">
 					<fieldset>
 						<legend class="screen_out">검색어 입력 폼</legend>
 						<label for="searchKeyword" class="lab_search">카카오맵 지도 검색</label> <input
@@ -835,7 +851,7 @@ $(document).ready(function() {
 
 								</div>
 							총금액:<input id="goodsTotAmt" name="pay_cart" value="0" readonly> 
-							<input type='submit' value='구매하기' onclick="javascript:openPopup()" /> 
+							<input type='button' value='구매하기' onclick="javascript:openPopup()" /> 
 								
 						
 							</form>

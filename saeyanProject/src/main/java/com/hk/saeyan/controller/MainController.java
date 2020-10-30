@@ -31,7 +31,14 @@ public class MainController {
 		return "main/price";
 	}
 	
+	
+	@GetMapping("/error")
+	public String error(Model model) {
+		System.out.println("error 페이지 호출...");
 		
+		return "main/error";
+	}	
+			
 		
 	
 	

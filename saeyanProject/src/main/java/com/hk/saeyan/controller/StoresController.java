@@ -83,6 +83,11 @@ public class StoresController {
 		model.addAttribute("storeInfo",storeInfo);
 		model.addAttribute("product",mainService.price());
 		model.addAttribute("reviewList", mainService.reviewList(snum));
+		
+		if(storeInfo.getSdcheck().equals("Y")) {
+			return "main/error";
+		}
+		
 		return "main/storesInfo";
 	}
 

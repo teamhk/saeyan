@@ -68,29 +68,29 @@ public class MainService {
 		if( likeStores.getLikeStore1() == null ) {
 			System.out.println("찍히니1");
 			mainMapper.updateLikeStore1(id, snum);
-			return 0;
+			return 1;
 		} else if ( likeStores.getLikeStore2() == null) {
 			System.out.println("찍히니2");
 			mainMapper.updateLikeStore2(id, snum);
-			return 0;
+			return 2;
 		} else if ( likeStores.getLikeStore3() == null) {
 			System.out.println("찍히니3");
 			mainMapper.updateLikeStore3(id, snum);
-			return 0;
+			return 3;
 		} else if ( likeStores.getLikeStore1().equals(snum)) {
 			System.out.println("likeStroe1에 있나?"+likeStores.getLikeStore1());
 			mainMapper.deleteLikeStore1(id, snum);
-			return 1;
+			return 4;
 		} else if ( likeStores.getLikeStore2().equals(snum)) {
 			System.out.println("찍히니4");
 			mainMapper.deleteLikeStore2(id, snum);
-			return 1;
+			return 5;
 		} else if ( likeStores.getLikeStore3().equals(snum)) {
 			System.out.println("찍히니5");
 			mainMapper.deleteLikeStore3(id, snum);
-			return 1;
+			return 6;
 		} else {
-			return 2;
+			return 7;
 		}
 	}
 	
