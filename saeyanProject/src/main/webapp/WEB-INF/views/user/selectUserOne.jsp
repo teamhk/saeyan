@@ -11,11 +11,8 @@
 <%  
 	PersonalPay pay = (PersonalPay) request.getAttribute("pay");
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원 정보 수정</title>
+<%@ include file="../include/headerReal.jsp" %>
+<title>회원정보수정</title>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script type="text/javascript">
@@ -67,45 +64,112 @@ function sample6_execDaumPostcode() {
     }).open();
 }
 </script>
-</head>
-<body>
-<h1>회원 정보 수정</h1>
-	<div class="col-sm-6 col-md-offset-3">
-			<form action='update' name='storeform' method='post' id='storeform'>
-				<input type="hidden" name="grade" value="1">
-				<label><b>아이디</b></label>
-				<input type='text' name='id' value="${loginMember.id }" readonly><br>
-				<label><b>비밀번호</b></label>
-				<input id='pwdcheck' type='password' name= "" value="">&nbsp;&nbsp;<span id="result1"></span><br>
-				<label><b>새 비밀번호</b></label>
-				<input id='newPwd' type='password' value=""><br>
-				<label><b>새 비밀번호 확인</b></label>
-				<input type='password' id='pwd' name="" value="">&nbsp;&nbsp;<span id="result2"></span><br>
-				<label><b>이름</b></label>
-				<input type='text' name='name' value="${user.name}"><br>
-				<label><b>이메일</b></label>
-				<input type='text' name='email' value="${user.email}"><br>
-				<label><b>휴대전화</b></label>
-				<input type='number' name='pnum' value="${user.pnum}"><br> 
-				<label><b>집주소!!!!!!!!!</b></label>
-				<input type="text" id="sample6_postcode" placeholder="${user.userZipCode}" name="userZipCode" value="${user.userZipCode}">
-				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" id="sample6_address" placeholder="주소" name="userFirstAddr" value="${user.userFirstAddr}"><br>
-				<input type="text" id="sample6_extraAddress" placeholder="참고항목" name="userExtraAddr" value="${user.userExtraAddr}"><br>
-				<input type="text" id="sample6_detailAddress" placeholder="상세주소" name="userSecondAddr" value="${user.userSecondAddr}">
-			</form>
+<div id="container">
+	<div id="content" class="brd-wr">
+		<div class="tit-area">
+			<h2>회원정보수정</h2>
 		</div>
-		<button id='btn' disabled onclick="abcd();">전송</button>
+		<div class="brd-bx">
+			<div class="inner">
+				<h3 class="h3-tit fir">
+					<span class="cBlue">새얀</span>
+					회원정보수정
+				</h3>
+				<div class="write-bx">
+					<form action='update' name='rform' method='post' id='storeform'>
+						<div class="rows">
+						<input type="hidden" name="grade" value="1">
+							<span class="tit-tx m-4">
+								<b>아이디</b>
+							</span>
+							<div class="con-tx m-8">
+								<span class="input p-4 m-12" >${loginMember.id }</span><br>
+								<input type="hidden" name="id" value="${loginMember.id }">
+							</div>
+						</div>
+						<div class="rows">
+							<span class="tit-tx m-4">
+								<b>비밀번호</b>
+							</span>
+							<div class="con-tx m-12">
+								<input id='pwdcheck' type='password' class="input p-6 m-12" name= "" value="">&nbsp;&nbsp;<span id="result1"></span><br>
+							</div>
+						</div>
+						<div class="rows">
+							<span class="tit-tx m-4">
+								<b>새 비밀번호</b>
+							</span>
+							<div class="con-tx m-12">
+								<input type='password' id='newPwd' name="" class="input p-6 m-12" value=""><br>
+							</div>
+						</div>
+						<div class="rows">
+							<span class="tit-tx m-4">
+								<b>새 비밀번호 확인</b>
+							</span>
+							<div class="con-tx m-12">
+								<input type='password' id='pwd' name="" class="input p-6 m-12" value="">&nbsp;&nbsp;<span id="result2"></span><br>
+							</div>
+						</div>
+						<div class="rows">
+							<span class="tit-tx m-4">
+								<b>이름</b>
+							</span>
+							<div class="con-tx m-12">
+								<span class="input p-4 m-12">${user.name}</span>
+								<input type="hidden" name="name" value="${user.name}">
+							</div>
+						</div>
+						<div class="rows">
+							<span class="tit-tx m-4">
+								<b>이메일</b>
+							</span>
+							<div class="con-tx m-12">
+								<span class="input p-4 m-12">${user.email}</span>
+								<input type='hidden' name='email' value="${user.email}"><br>
+							</div>
+						</div>
+						<div class="rows">
+							<span class="tit-tx m-4">
+								<b>휴대전화</b>
+							</span>
+							<div class="con-tx m-12">
+								<input type='text' class="input p-6 m-12" name='pnum' value="${user.pnum}"><br> 
+							</div>
+						</div>
+						<div class="rows">
+							<span class="tit-tx m-4">
+								<b>집주소</b>
+							</span>
+							<div class="con-tx m-12">
+								<input type="text" id="sample6_postcode" placeholder="${user.userZipCode}" name="userZipCode" value="${user.userZipCode}">
+								<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-gray m-3 call-poppwset" value="우편번호 찾기"><br>
+								<input type="text" id="sample6_address" placeholder="주소" class="input p-6 m-12" name="userFirstAddr" value="${user.userFirstAddr}">
+								<input type="text" id="sample6_extraAddress" placeholder="참고항목" class="input p-6 m-12" name="userExtraAddr" value="${user.userExtraAddr}">
+								<input type="text" id="sample6_detailAddress" placeholder="상세주소" class="input p-6 m-12" name="userSecondAddr" value="${user.userSecondAddr}">
+							</div>
+						</div>
+					</form>
+				</div>
+			<div class="btn-box">
+				<a href="javascript:void(0);" class="btn btn-blue btn-lg" onclick="abcd();" id="submintCheck">수정</a>	
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script>
+
 $().ready(function() {
 	$("#pwdcheck").change(function() {
 		pwdch = document.getElementById('pwdcheck').value;
 		if(pwdch===("<%=user.getPwd()%>")){
 			$("#result1").text("비밀번호가 일치합니다.");
-			$('#btn').prop('disabled',false);
+			$('.btn').prop('disabled',false);
 		} else {
 			$("#result1").text("비밀번호가 일치 하지 않습니다.");
-			$('#btn').prop('disabled',true);
+			$('.btn').prop('disabled',true);
 		}
 	});
 	
@@ -117,15 +181,11 @@ function newPwdCheck(){
 	newPwd = document.getElementById('newPwd').value;
 	rePwd = document.getElementById('pwd').value;
 	if(rePwd===newPwd){
-		$('#btn').prop('disabled',false);
-	} else{
-		$('#btn').prop('disabled',true);
-	}
-	if($('#btn').prop('disabled')){
-		$("#result2").text("새 비밀번호가 일치 하지 않습니다.");
-	} else {
 		$("#result2").text("새 비밀번호가 일치합니다.");
+	} else{
+		$("#result2").text("새 비밀번호가 일치 하지 않습니다.");
 	}
+	
 	if(rePwd===""){
 		$("#result2").text("");
 	}
@@ -138,8 +198,20 @@ function abcd(){
 		rePwd.setAttribute("name","pwd");
 	} else {
 		pwdcheck.setAttribute("name","pwd");
+	}  
+
+	pwdch = document.getElementById('pwdcheck').value;
+	newPwd =document.getElementById("newPwd").value;
+	rePwd = document.getElementById("pwd").value;
+	
+	if(pwdch != ("<%=user.getPwd()%>")) {
+		document.getElementById('pwdcheck').focus();
+		return false;
+	} else if(newPwd != rePwd){
+		alert('새 비밀번호가 일치 하지 않습니다.');
+		return false;
 	}
-	document.storeform.submit();
+	document.rform.submit();
 }
 </script>
 </body>

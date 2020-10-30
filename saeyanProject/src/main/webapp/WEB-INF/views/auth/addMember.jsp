@@ -3,11 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="../include/headerReal.jsp" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><!-- daum 도로명주소 찾기 api --> 
 <script type="text/javascript">
@@ -395,77 +391,150 @@ function submitCheck() {
 		var str = ($("#expMM").val()+$("#expYY").val());
 		$("#cardExp").val(str);
 		console.log($("#cardExp").val());
-		document.addCustomer.submit();
+		document.rform.submit();
 }
 
 </script>
 </head>
 <body>
-	<article class="container">
-		<div class="page-header">
-			<div class="col-md-6 col-md-offset-3">
-			<h3>회원가입</h3>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-offset-3">
-			<form name="addCustomer" action="addCustomer" method="post">
+	<div class="brd-bx">
+		<div class="inner">
+			<h3 class="h3-tit fir">회원정보입력</h3>
+			<div class="write-bx">
+			<form name="rform" action="addCustomer" method="post">
 				<input type="hidden" name="grade" value="1">
 				<input type="hidden" name="udCheck" value="N">
-				<label><b>아이디</b></label>
-				<input type="text" id="id" placeholder="ID" name="id" oninput="checkId()">
-				<div class="validation" id="id_check"></div>
-				<label><b>비밀번호</b></label>
-				<input type="password" id="pwd" placeholder="PASSWORD" name="pwd" oninput="checkPwd()">
-				<div class="validation" id="pwd_check"></div>
-				<label><b>비밀번호 재확인</b></label>
-				<input type="password" id="re-pwd" placeholder="Confirm Password" name="re-pwd" oninput="reCheckPwd()">
-				<div class="validation" id="pwd_re_check"></div>
-				<label><b>이름</b></label>
-				<input type="text" id="name" placeholder="Name" name="name" oninput="checkName()">
-				<div class="validation" id="name_check"></div>
-				<label><b>이메일</b></label>
-				<input type="text" id="email" placeholder="E-mail" name="email" oninput="checkEmail()"><button type="button" id="emailBtn" onclick="">이메일 발송</button><br>
-				<input type="text" id="checkCode" placeholder="인증번호 입력" name="checkCode"><button type="button" id="codeBtn">인증확인</button><br>
-				<div class="validation" id="email_check"></div>
-				<label><b>휴대전화</b></label>
-				<input type="text" id="pnum" placeholder="Phone Number" name="pnum" oninput="checkPnum()">
-				<div class="validation" id="pnum_check"></div>
-				<label><b>집주소</b></label>
-				<input type="text" id="sample6_postcode" placeholder="우편번호" name="userZipCode">
-				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" id="sample6_address" placeholder="주소" name="userFirstAddr"><br>
-				<input type="text" id="sample6_extraAddress" placeholder="참고항목" name="userExtraAddr"><br>
-				<input type="text" id="sample6_detailAddress" placeholder="상세주소" name="userSecondAddr">
-				<h5>결제 카드 등록</h5>
-				<label for="cardCom"><b>카드회사</b></label>
-				<select id="cardCom" name="cardCom">
-					<option value="" selected>-카드사를 선택해 주세요-</option>
-					<option value="KB카드">KB국민카드</option>
-					<option value="신한카드">신한카드</option>
-					<option value="하나카드">하나카드</option>
-					<option value="롯데카드">롯데카드</option>
-					<option value="BC카드">BC카드</option>
-					<option value="농협카드">NH농협카드</option>
-					<option value="삼성카드">삼성카드</option>
-					<option value="현대카드">현대카드</option>
-				</select><br>
-				<label><b>카드번호</b></label>
-				<input type="text" size="20" id="cardNum" name="cardNum" maxlength="12" oninput="checkCardNum()">
-				<div class="validation" id="cardNum_check"></div>
-				<label><b>유효기간</b></label>
-				<label><b>월</b></label>
-				<input type="text" size="20" id="expMM" maxlength="4" oninput="checkMM()">
-				<label><b>년</b></label>
-				<input type="text" size="20" id="expYY" maxlength="4">
-				<input type="hidden" id="cardExp" name="cardExp" value=""><br>
-				<div class="validation" id="cardExp_check"></div>
-				<label><b>CVC</b></label>
-				<input type="text" size="20" id="cardCvc" name="cardCvc"><br>
-				<input type="hidden" id="cardCheck" name="cardCheck" value="N" >
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>아이디</b>
+					</span>
+					<div class="con-tx m-12">
+						<input type="text" id="id" placeholder="ID" name="id" oninput="checkId()">
+						<span class="help-tx">*8~12자의 영문 소문자, 숫자만 사용 가능합니다.</span>
+						<div class="validation" id="id_check" ></div>
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>비밀번호</b>
+					</span> 
+					<div class="con-tx me-12">
+						<input type="password" id="pwd" placeholder="PASSWORD" name="pwd" oninput="checkPwd()">
+						<span class="help-tx">*7~15자의 영문 대소문자, 숫자와 특수기호~!@\#$%<>^&*로만 사용 가능합니다.</span>
+						<div class="validation" id="pwd_check"></div>
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>비밀번호 재확인</b>
+					</span>
+					<div class="con-tx me-12">
+						<input type="password" id="re-pwd" placeholder="Confirm Password" name="re-pwd" oninput="reCheckPwd()">
+						<span class="help-tx">*동일한 비밀번호를 다시 입력 해주세요.</span>
+						<div class="validation" id="pwd_re_check"></div>
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>이름</b>
+					</span>
+					<div class="con-tx me-12">
+						<input type="text" id="name" placeholder="Name" name="name" oninput="checkName()">
+						<span class="help-tx">*공백불가, 한글만 입력해주세요.</span>
+						<div class="validation" id="name_check"></div>
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>이메일</b>
+					</span>
+					<div class="con-tx me-12">
+						<input type="text" id="email" placeholder="E-mail" name="email" oninput="checkEmail()"><button type="button" id="emailBtn" class="btn btn-gray m-3 call-poppwset" onclick="">이메일 발송</button><br>
+						<input type="text" id="checkCode" placeholder="인증번호 입력" name="checkCode"><button type="button" id="codeBtn" class="btn btn-gray m-3 call-poppwset" >인증확인</button><br>
+						<div class="validation" id="email_check"></div>
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>휴대전화</b>
+					</span>
+					<div class="con-tx me-12">
+						<input type="text" id="pnum" placeholder="Phone Number" name="pnum" oninput="checkPnum()">
+						<span class="help-tx">*'-'없이 번호만 입력해주세요</span>
+						<div class="validation" id="pnum_check"></div>
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>자택주소</b>
+					</span>
+					<div class="con-tx me-12">
+						<input type="text" id="sample6_postcode" placeholder="우편번호" name="userZipCode">
+						<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-gray m-3 call-poppwset" value="우편번호 찾기"><br>
+						<input type="text" id="sample6_address" placeholder="주소" name="userFirstAddr">
+						<input type="text" id="sample6_extraAddress" placeholder="참고항목" name="userExtraAddr"><br>
+						<input type="text" id="sample6_detailAddress" placeholder="상세주소" name="userSecondAddr">
+					</div>
+				</div>
+				<div class="rows">
+					<div class="tit-tx m-12">
+					<b>결제카드 등록</b>
+					
+					<div class="tit-tx m-12">
+					<b>카드회사</b>
+					
+					<span class="cont-tx me-12">
+						<select class="select m-3" id="cardCom" name="cardCom">
+							<option value="" selected>-카드사를 선택해 주세요-</option>
+							<option value="KB카드">KB국민카드</option>
+							<option value="신한카드">신한카드</option>
+							<option value="하나카드">하나카드</option>
+							<option value="롯데카드">롯데카드</option>
+							<option value="BC카드">BC카드</option>
+							<option value="농협카드">NH농협카드</option>
+							<option value="삼성카드">삼성카드</option>
+							<option value="현대카드">현대카드</option>
+						</select>
+					</span>
+					
+					<span class="tit-tx m-12">
+					<b>카드번호</b>
+					</span>
+					<span class="cont-tx me-12">
+						<input type="text" size="20" id="cardNum" name="cardNum" maxlength="12" oninput="checkCardNum()">
+						<span class="help-tx">*'-'없이 번호만 입력해주세요</span>
+						<span class="validation" id="cardNum_check"></span>
+					</span>
+					
+					</div>
+					</div>
+					<div class="tit-tx m-12">
+					<b>유효기간</b>
+					<b>월</b>
+					<div class="cont-tx me-12">
+						<input type="text" size="20" id="expMM" maxlength="4" oninput="checkMM()">
+					</div>
+					<b>년</b>
+					<div class="cont-tx me-12">
+						<input type="text" size="20" id="expYY" maxlength="4">
+						<input type="hidden" id="cardExp" name="cardExp" value=""><br>
+					<div class="validation" id="cardExp_check"></div>
+					</div>
+					<b>CVC</b>
+					<div class="cont-tx me-12">
+						<input type="text" size="20" id="cardCvc" name="cardCvc"><br>
+						<input type="hidden" id="cardCheck" name="cardCheck" value="N" >
+					</div>
+					</div>
+				</div>
 				<!-- 카드 날짜 입력 받는거 상의해야해, 혹시 굳이 날싸 입력 받아야 된다고 하면 int타입으로 바꾸고 월입력칸 따로 년도 입력칸 따로 만든후 DB에도 칼럼을 그냥 date타입으로 하나만 하는게 아니라 나눠서 하기 -->
-				<input type="button" value="회원가입" class="signup" onclick="submitCheck()" id="submintCheck">
 			</form>
-		</div>
-	</article>		
+			</div>
+			<div class="btn-box">
+				<a href="javascript:void(0);" class="btn btn-blue btn-lg" onclick="submitCheck();" id="submintCheck">완료</a>			
+				<a href="/" class="btn btn-default1 btn-lg">취소</a>
+			</div>
+		</div>	
+	</div>		
 </body>
 </html>

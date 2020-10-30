@@ -2,11 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="../include/headerReal.jsp" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><!-- daum 도로명주소 찾기 api --> 
 <script type="text/javascript">
@@ -510,106 +506,190 @@ function submitCheck() {
 			$("[name='area_num']").val('25');  //중랑구
 		}
 	}
-		document.addOwner.submit();
+		document.rform.submit();
 }
 
 </script>
 </head>
 <body>
-	<h3>회원가입</h3>
-		<form id="myForm" name="addOwner" action="addOwner" method="post" enctype="multipart/form-data">
+	<div class="brd-bx">
+		<div class="inner">
+			<h3 class="h3-tit fir">업주 회원정보입력</h3>
+			<div class="write-bx">
+			<form name="rform" action="addOwner" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="grade" value="2">
 				<input type="hidden" name="permit" value="N">
 				<input type="hidden" name="sdcheck" value="N">
 				<input type="hidden" id="cardCheck" name="cardCheck" value="N" >
-				<label><b>아이디</b></label>
-				<input type="text" id="id" placeholder="ID" name="id" oninput="checkId()">
-				<div class="validation" id="id_check"></div>
-				<label><b>비밀번호</b></label>
-				<input type="password" id="pwd" placeholder="PASSWORD" name="pwd" oninput="checkPwd()">
-				<div class="validation" id="pwd_check"></div>
-				<label><b>비밀번호 재확인</b></label>
-				<input type="password" id="re-pwd" placeholder="Confirm Password" name="re-pwd" oninput="reCheckPwd()">
-				<div class="validation" id="pwd_re_check"></div>
-				<label><b>이름</b></label>
-				<input type="text" id="name" placeholder="Name" name="name" oninput="checkName()">
-				<div class="validation" id="name_check"></div>
-				<label><b>이메일</b></label>
-				<input type="text" id="email" placeholder="E-mail" name="email" oninput="checkEmail()"><button type="button" id="emailBtn" onclick="">이메일 발송</button><br>
-				<input type="text" id="checkCode" placeholder="인증번호 입력" name="checkCode"><button type="button" id="codeBtn">인증확인</button><br>
-				<div class="validation" id="email_check"></div>
-				<label><b>휴대전화</b></label>
-				<input type="text" id="pnum" placeholder="Phone Number" name="pnum" oninput="checkPnum()">
-				<div class="validation" id="pnum_check"></div>
-				<label><b>집주소</b></label>
-				<input type="text" id="sample6_postcode" placeholder="우편번호" name="userZipCode">
-				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" id="sample6_address" placeholder="주소" name="userFirstAddr"><br>
-				<input type="text" id="sample6_extraAddress" placeholder="참고항목" name="userExtraAddr"><br>
-				<input type="text" id="sample6_detailAddress" placeholder="상세주소" name="userSecondAddr">
-				<label><b>상호명</b></label>
-				<input type="text" name="sname"><br>
-				<label><b>상호 주소</b></label>
-				<input type="text" id="sample6_postcode1" placeholder="우편번호" name="storeZipCode">
-				<input type="button" onclick="sample6_execDaumPostcode1()" value="우편번호 찾기"><br>
-				<input type="text" id="sample6_address1" placeholder="주소"  name="storeFirstAddr"><br>
-				<input type="text" id="sample6_extraAddress1" placeholder="참고항목" name="storeExtraAddr"><br>
-				<input type="text" id="sample6_detailAddress1" placeholder="상세주소" name="storeSecondAddr">				
-				<input type='hidden' name='area_num' value='0'>
-				<input type="hidden" id="saddress" name="saddress" value="">
-				<label><b>상호 연락처</b></label>
-				<input type="text" id="scontact" placeholder="Store Contact Number" name="scontact" oninput="checkScontact()">
-				<div class="validation" id="scontact_check"></div>
-				<label><b>사업자 등록 번호</b></label>
-				<input type='text' name='snum' id="snum"><br>
-				<label for="banks">은행명:</label>
-				<select id="banks" name="bank" >
-		  			<option value="" selected>-은행을 선택해 주세요-</option>
-		  			<option value="국민">국민</option>
-		  			<option value="기업">기업</option>
-		  			<option value="농협">농협</option>
-		  			<option value="신한">신한</option>
-		  			<option value="우체국">우체국</option>
-		  			<option value="스탠다드차타드">스탠다드차타드</option>
-		  			<option value="하나">하나</option>
-		  			<option value="우리">우리</option>
-		  			<option value="산업">산업</option>
-		  			<option value="수협">수협</option>
-		  			<option value="새마을금고">새마을금고</option>
-		  			<option value="신용협동조합">신용협동조합</option>
-		  			<option value="저축은행">저축은행</option>
-		  			<option value="케이뱅크">케이뱅크</option>
-		  			<option value="카카오뱅크">카카오뱅크</option>
-		  		</select>
-		  		<label><b>계좌번호</b></label>
-				<input type='number' id="bnum" name='bnum' ><br>
-				<label><b>취급 품목</b></label>
-				<input type='button' id='btn' value='펼치기'><br>
-				<fieldset>
-					<legend>취급 품목 리스트</legend>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>아이디</b>
+					</span>
+					<div class="con-tx m-12">
+						<input type="text" id="id" placeholder="ID" name="id" oninput="checkId()">
+						<span class="help-tx">*8~12자의 영문 소문자, 숫자만 사용 가능합니다.</span>
+						<div class="validation" id="id_check" ></div>
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>비밀번호</b>
+					</span> 
+					<div class="con-tx me-12">
+						<input type="password" id="pwd" placeholder="PASSWORD" name="pwd" oninput="checkPwd()">
+						<span class="help-tx">*7~15자의 영문 대소문자, 숫자와 특수기호~!@\#$%<>^&*로만 사용 가능합니다.</span>
+						<div class="validation" id="pwd_check"></div>
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>비밀번호 재확인</b>
+					</span>
+					<div class="con-tx me-12">
+						<input type="password" id="re-pwd" placeholder="Confirm Password" name="re-pwd" oninput="reCheckPwd()">
+						<span class="help-tx">*동일한 비밀번호를 다시 입력 해주세요.</span>
+						<div class="validation" id="pwd_re_check"></div>
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>이름</b>
+					</span>
+					<div class="con-tx me-12">
+						<input type="text" id="name" placeholder="Name" name="name" oninput="checkName()">
+						<span class="help-tx">*공백불가, 한글만 입력해주세요.</span>
+						<div class="validation" id="name_check"></div>
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>이메일</b>
+					</span>
+					<div class="con-tx me-12">
+						<input type="text" id="email" placeholder="E-mail" name="email" oninput="checkEmail()"><button type="button" id="emailBtn" class="btn btn-gray m-3 call-poppwset" onclick="">이메일 발송</button><br>
+						<input type="text" id="checkCode" placeholder="인증번호 입력" name="checkCode"><button type="button" id="codeBtn" class="btn btn-gray m-3 call-poppwset" >인증확인</button><br>
+						<div class="validation" id="email_check"></div>
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>휴대전화</b>
+					</span>
+					<div class="con-tx me-12">
+						<input type="text" id="pnum" placeholder="Phone Number" name="pnum" oninput="checkPnum()">
+						<span class="help-tx">*'-'없이 번호만 입력해주세요</span>
+						<div class="validation" id="pnum_check"></div>
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>자택주소</b>
+					</span>
+					<div class="con-tx me-12">
+						<input type="text" id="sample6_postcode" placeholder="우편번호" name="userZipCode">
+						<input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-gray m-3 call-poppwset" value="우편번호 찾기"><br>
+						<input type="text" id="sample6_address" placeholder="주소" name="userFirstAddr">
+						<input type="text" id="sample6_extraAddress" placeholder="참고항목" name="userExtraAddr"><br>
+						<input type="text" id="sample6_detailAddress" placeholder="상세주소" name="userSecondAddr">
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>상호명</b>
+					</span>
+					<div class="con-tx me-12">
+						<input type="text" name="sname"><br>
+					</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span class="tit-tx m-12">
+						<b>사업자 등록 번호</b>
+					</span>
+					<div class="con-tx me-12">
+						<input type='text' name='snum' id="snum"><br>
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>상호 주소</b>
+					</span>
+					<div class="con-tx me-12">
+						<input type="text" id="sample6_postcode1" placeholder="우편번호" name="storeZipCode">
+						<input type="button" onclick="sample6_execDaumPostcode1()" class="btn btn-gray m-3 call-poppwset" value="우편번호 찾기"><br>
+						<input type="text" id="sample6_address1" placeholder="주소"  name="storeFirstAddr">
+						<input type="text" id="sample6_extraAddress1" placeholder="참고항목" name="storeExtraAddr"><br>
+						<input type="text" id="sample6_detailAddress1" placeholder="상세주소" name="storeSecondAddr">				
+						<input type='hidden' name='area_num' value='0'>
+						<input type="hidden" id="saddress" name="saddress" value="">
+					</div>
+					<span class="tit-tx m-12">
+					<b>상호 연락처</b>
+					</span>
+					<div class="con-tx me-12">
+						<input type="text" id="scontact" placeholder="Store Contact Number" name="scontact" oninput="checkScontact()">
+						<div class="validation" id="scontact_check"></div>
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+						<label for="banks"><b>은행명</b></label>
+					</span> 
+					<div class="con-tx me-12">
+						<select id="banks" name="bank" >
+				  			<option value="" selected>-은행을 선택해 주세요-</option>
+				  			<option value="국민">국민</option>
+				  			<option value="기업">기업</option>
+				  			<option value="농협">농협</option>
+				  			<option value="신한">신한</option>
+				  			<option value="우체국">우체국</option>
+				  			<option value="스탠다드차타드">스탠다드차타드</option>
+				  			<option value="하나">하나</option>
+				  			<option value="우리">우리</option>
+				  			<option value="산업">산업</option>
+				  			<option value="수협">수협</option>
+				  			<option value="새마을금고">새마을금고</option>
+				  			<option value="신용협동조합">신용협동조합</option>
+				  			<option value="저축은행">저축은행</option>
+				  			<option value="케이뱅크">케이뱅크</option>
+				  			<option value="카카오뱅크">카카오뱅크</option>
+		  				</select>
+					</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span class="tit-tx m-12">
+					<b>계좌번호</b>
+					</span>
+					<div class="con-tx me-12">
+						<input type='text' id="bnum" name='bnum' >
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>취급품목</b>
+					</span>
+					<div class="con-tx me-12">
 						<c:forEach var="product" items="${product}" varStatus="status">
 							<input type='checkbox' id='${product.pname }' name='items' value='${product.pname}'>${product.pname}&nbsp;&nbsp;&nbsp;
 							<c:if test="${status.count%5==0}"><br></c:if>
 						</c:forEach>
-<!-- 						<input type='checkbox' id='와이셔츠' name='Y1' value='N'>와이셔츠&nbsp;&nbsp;&nbsp; -->
-<!-- <!-- 					<input type='hidden' name='Blouse' value='0'> -->
-<!-- 						<input type='checkbox' id='블라우스' name='B1' valu
-<!-- 						<input type='checkbox' id='티셔츠' name='T1' value='N'>티셔츠&nbsp;&nbsp;&nbsp; -->
-<!-- <!-- 					<input type='hidden' name='T_shirt' value='0'> --> 
-<!-- 						<input type='checkbox' id='맨투맨/후드' name='M1' value='N'>맨투맨/후드&nbsp;&nbsp;&nbsp; -->
-<!-- 						<input type='checkbox' id='바지' name='P1' value='N'>바지&nbsp;&nbsp;&nbsp; -->
-<!-- 						<input type='checkbox' id='니트류' name='K1' value='N'>니트류&nbsp;&nbsp;&nbsp;<br> -->
-<!-- 						<input type='checkbox' id='자켓' name='J1' value='N'>자켓&nbsp;&nbsp;&nbsp; -->
-<!-- 						<input type='checkbox' id='코트' name='C1' value='N'>코트&nbsp;&nbsp;&nbsp; -->
-<!-- 						<input type='checkbox' id='패딩' name='P2' value='N'>패딩&nbsp;&nbsp;&nbsp; -->
-<!-- 						<input type='checkbox' id='이불' name='D1' value='N'>이불&nbsp;&nbsp;&nbsp; -->
-<!-- 						<input type='checkbox' id='신발' name='S1' value='N'>신발&nbsp;&nbsp;&nbsp; -->
-<!-- 						<input type='checkbox' id='커튼' name='C2' value='N'>커튼&nbsp;&nbsp;&nbsp; -->
-<!-- 						<input type='checkbox' id='가방' name='B2' value='N'>가방&nbsp;&nbsp;&nbsp;			 -->
-				</fieldset>
-				<input type="hidden" id ="items" name="items" value="">
-				<input type="file" id="file" value="파일 선택" multiple="multiple" name="uploadFile" maxlength="4"/><br>
-				<input type="button" value="회원가입" class="signup" onclick="submitCheck()" id="submintCheck">
-		</form>
+						<input type="hidden" id ="items" name="items" value="">
+					</div>
+				</div>
+				<div class="rows">
+					<span class="tit-tx m-12">
+					<b>업장사진</b>
+					</span>
+					<div class="con-tx">
+						<span class="file-inp">
+						<input type="file" id="file" value="파일 선택" class="input" multiple="multiple" name="uploadFile" maxlength="4"/><br>
+						<p class="help-tx">*사진은 최대 4개까지 업로드 가능합니다.</p>
+						</span>
+					</div>
+				</div>
+				
+			</form>
+			</div>
+			<div class="btn-box">
+				<a href="javascript:void(0);" class="btn btn-blue btn-lg" onclick="submitCheck()" id="submintCheck">완료</a>
+				<a href="/" class="btn btn-default1 btn-lg">취소</a>
+			</div>
+		</div>
+	</div>	
 </body>
 </html>
