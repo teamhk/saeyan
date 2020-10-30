@@ -4,16 +4,14 @@
 <%@ page import="com.hk.saeyan.dto.ManagerInfo" %>
 <%@ page import="com.hk.saeyan.dto.Members" %>
 <% ManagerInfo user = (ManagerInfo)request.getAttribute("user");%>
-<% Members loginMember = (Members)request.getAttribute("loginMember");%>
-<!DOCTYPE html>
-<html>
-<head>
+<%-- <% Members loginMember = (Members)request.getAttribute("loginMember");%> --%>
+<%@ include file="../include/headerReal.jsp" %>
     <meta charset="utf-8">
-    <title>지도 생성하기</title>
+    <title>인근 점포</title>
     <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:100%;height:500px;}
+.map_wrap {position:relative;width:100%;height:750px;}
 #menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
@@ -52,33 +50,43 @@
     <title>마커에 클릭 이벤트 등록하기</title>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a6d8aa5bbd65de785c05503aa93df3ae&libraries=services"></script>
+<div id="container">
+	<div id="content" class="brd-wr">
+		<div class="tit-area">
+		<h2>인근 매장 찾기</h2>
+		<p class="sub-tx">원하시는 지역을 검색해 주세요.</p>
+		</div>
+		
+			
+				<div class="map_wrap">
+					<div id="map" style="width:2400px;height:750px;position:fixed;overflow:hidden;"></div>
+    					 <div id="menu_wrap" class="bg_white">
+       						 <div class="option">
+            					<div>
+               					 <form onsubmit="searchPlaces(); return false;">
+                   				 키워드 : <input type="text" value="${user.userFirstAddr } " id="keyword" size="15">
+                    			<button type="submit">검색하기</button> 
+               					 </form>
+           					 </div>
+        				</div>
+        				<hr>
+        				<ul id="placesList"></ul>
+        				<div id="pagination"></div>
+    					</div>
+					</div>
+				
+			
+		</div>
+	</div>
 
-</head>
-<body>
-<div class="map_wrap">
-    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
-    <div id="menu_wrap" class="bg_white">
-        <div class="option">
-            <div>
-                <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="${user.userFirstAddr } 세탁" id="keyword" size="15">
-                    <button type="submit">검색하기</button> 
-                </form>
-            </div>
-        </div>
-        <hr>
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
-    </div>
-</div>
 <p><em>마커를 클릭해주세요!</em></p> 
 <script>
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
     center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-    level:3 // 지도의 확대 레벨
+    level:7 // 지도의 확대 레벨
 };  
 
 //지도를 생성합니다    
