@@ -33,6 +33,7 @@
 <!-- head -->
 <link rel="stylesheet" href="/resources/css/saeyan.css" type="text/css">
 <link rel="stylesheet" href="/resources/css/customer.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="/resources/css/usePage.css">
 <link
 	href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700"
 	rel="stylesheet">
@@ -46,23 +47,13 @@
 <script src="https://www.cleantopia.com/kr/js/owl.carousel.js"></script>
 <script src="https://www.cleantopia.com/kr/js/custom.js"></script>
 <script src="https://www.cleantopia.com/kr/js/menulink.js"></script>
+
 </head>
 <body>
 <div id="wrap">
+
 	<div id="header">
 		<h1 class="logo"><a href="/"></a></h1>
-<!-- 		<div class="header-top"> -->
-<%-- 			<c:if test="${loginMember!=null}"> --%>
-<!-- 				<ul> -->
-<%-- 					<li>${name}님 새얀에 오신걸 환영합니다.</li> --%>
-<!-- 					<li>마이페이지</li> -->
-<!-- 					<li>로그아웃</li> -->
-<!-- 				</ul> -->
-<%-- 			</c:if> --%>
-<!-- 			<ul> -->
-<!-- 				<li><a href="/auth/login">로그인</a></li> -->
-<!-- 			</ul> -->
-<!-- 		</div> -->
 	<div id="gnb-wrap">
 		<ul id="gnb">
 			<li class="gnb1"><a href="#">새 얀</a>

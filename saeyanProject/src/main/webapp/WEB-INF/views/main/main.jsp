@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="../include/headerReal.jsp" %>
+
 <meta name="viewport" content="width=device-width, initial-scale=0">
 <link rel="stylesheet" media="screen"
 	href="https://static.codepen.io/assets/fullpage/fullpage-4de243a40619a967c0bf13b95e1ac6f8de89d943b7fc8710de33f681fe287604.css">
@@ -257,7 +257,7 @@ mixin transition( $time, $property: all, $easing: ease-in) {
 .css-nh7bfr div {
     line-height: 1.28;
 }
-font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif
+.font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif
 .css-1xnbglt .text-fade > div, .css-1xnbglt .text-fade > img, .css-1xnbglt .text-fade > span {
     will-change: opacity;
     transition-property: opacity;
@@ -278,7 +278,7 @@ font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif
     window.parent.postMessage("resize", "*");
   }
 </script>
-
+<%@ include file="../include/headerReal.jsp" %>
 
 	<div class="section fp-section active fp-table fp-completely">
 		<section class="background">
@@ -288,7 +288,7 @@ font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif
 				<div class="small m_text-lines black css-nh7bfr">
 					<span class="form-section">
 						<div>
-							<span class="text-slide"> <span class="text delay-0">비대면
+							<span class="text-slide" > <span class="text delay-0" >비대면
 									세탁 서비스</span>
 							</span>
 						</div>
