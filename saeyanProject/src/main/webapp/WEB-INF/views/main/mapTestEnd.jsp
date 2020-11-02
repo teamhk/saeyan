@@ -59,7 +59,7 @@
 		
 			
 				<div class="map_wrap">
-					<div id="map" style="width:2400px;height:750px;position:fixed;overflow:hidden;"></div>
+					<div id="map" style="width:2400px;height:750px;position:relative;overflow:hidden;"></div>
     					 <div id="menu_wrap" class="bg_white">
        						 <div class="option">
             					<div>
