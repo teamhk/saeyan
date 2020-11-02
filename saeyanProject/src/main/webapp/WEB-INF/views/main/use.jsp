@@ -41,6 +41,7 @@
 						</div>
 			
 			<div class="wrap contentclass">
+			
 		<div class="sliderclass kad-desktop-slider">
 			<div id="imageslider" class="container">
 				<div class="flexslider kt-flexslider" style="height:430;">
@@ -48,7 +49,7 @@
 						<li><div
 							class="jumboslider-item">
 								<h1>
-						<span class="step">Step 1.</span><span>서비스 신청</span>
+						<span class="step" sytle">Step 1.</span><span>서비스 신청</span>
 					</h1>
 					<p>
 						새얀에 가입하고<br>나에게 맞는 서비스와 요금제를 신청하세요.
