@@ -1,24 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page import="com.hk.saeyan.dto.Cart"%>
 
 <%@ page import="java.util.List"%>
-<% List<Cart> cart=(List<Cart>) request.getAttribute("cartpay"); %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+<%
+	List<Cart> cart = (List<Cart>) request.getAttribute("cartpay");
+%>
+<%@ include file="../include/headerReal.jsp"%>
 <title>결재</title>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"
-   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-   crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-</head>
-<body>
-   <script type="text/javascript">
+	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="/resources/css/pay.css">
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<style>
+.tit h2 {
+	text-align: center;
+	padding-top: 50px;
+	font-size: 50px;
+}
+
+#btn {
+    margin-right: 40% !important;
+    margin-left: 40% !important;
+}
+
+
+</style>
+
+<script type="text/javascript">
       function itemSum() {
          console.log("시작");
          var sum = 0;
@@ -320,134 +335,306 @@
                                };
                              
    </script>
-   <form id="payform" method="post" >
-      <div class="payOrder">
-         <h2>주문내역</h2>
-         <table class="table table-bordered" id="tbl-product">
-            <colgroup>
-               <col style="width: 20%;" />
-               <col style="width: 20%" />
-               <col style="width: 20%" />
-               <col style="width: 20%" />
-               <col style="width: 20%" />
-            </colgroup>
-            <tr>
-               <th></th>
-               <th>세탁소</th>
-               <th>품목</th>
-               <th>가격</th>
-            </tr>
-          
-            <c:forEach var="cart" items="${cartpay}">
-            <input type="hidden" name="items" value="${cart.items}"/>
-            <input type="hidden" name="ret" value=""/>
-             <input type="hidden" name="sname" value="${cart.sname}"/>
-             <input type="hidden" name="snum" value="${cart.snum}"/>
-             <input type="hidden" name="paycart" value="${cart.pay_cart}"/>
-               <tr>
-                  <td class="product-close"><input type="checkbox"
-                     name="chkbox" onClick="itemSum()" class="chkbox"
-                     value="${cart.pay_cart}" disabled/></td>
-                  <td>${cart.sname}</td>
-                  <c:set var="itemStr" value="${cart.items}" />
-                  <c:set var="itemStr" value="${fn:replace(itemStr, '!@#', ':')}" />
-                  <c:set var="itemStr" value="${fn:replace(itemStr, '$%^', ',')}" />
-                  <c:set var="itemStr"
-                     value="${fn:substring(itemStr, 0, fn:length(itemStr)-1)}" />
-                  <td class='item'>${itemStr}</td>
-                  <td>${cart.pay_cart}</td>
-               </tr>
-            </c:forEach>
-         </table>
-          
-         <input type="hidden" name="cart_seq" value="${cart.cart_seq}" /> 
-         합계:<input type="text" class="total-cart-p" id="total_sum" name="pay_cart" value="" />
+<div class="tit">
+	<h2>Order</h2>
 
-      </div>
+</div>
+<form id="payform" method="post">
+	<div class="payOrder">
+		<h2>주문내역</h2>
+		<table class="table table-bordered" id="tbl-product">
+			<colgroup>
+				<col style="width: 20%;" />
+				<col style="width: 20%" />
+				<col style="width: 20%" />
+				<col style="width: 20%" />
+				<col style="width: 20%" />
+			</colgroup>
+			<tr>
+				<th></th>
+				<th>세탁소</th>
+				<th>품목</th>
+				<th>가격</th>
+			</tr>
 
-      <div class="member">
-         <h2>주문자 정보</h2>
-<%--          <input type="hidden" name="id" value="${finalPay.id}"/> --%>
-		<input type="hidden" name="id" value="${finalPay.id}"/>
-         주문하시는 분:<input type="text" id="orderName" name="name" value="${finalPay.name}" readonly  /><br>
-         주소: <input type="text" id="sample6_postcode" placeholder="${finalPay.userZipCode}" name="userZipCode" value="${finalPay.userZipCode}">
-            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-            <input type="text" id="sample6_address" placeholder="주소" name="userFirstAddr" value="${finalPay.userFirstAddr}"><br>
-            <input type="text" id="sample6_extraAddress" placeholder="참고항목" name="userExtraAddr" value="${finalPay.userExtraAddr}"><br>
-            <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="userSecondAddr" value="${finalPay.userSecondAddr}"><br>
-         휴대전화:<input type="text" id="orderpnum" name="orderpnum" value="${finalPay.pnum}" /><br>
-          이메일:<input type="text" name="email" value="${finalPay.email}" /><br>
+			<c:forEach var="cart" items="${cartpay}">
+				<input type="hidden" name="items" value="${cart.items}" />
+				<input type="hidden" name="ret" value="" />
+				<input type="hidden" name="sname" value="${cart.sname}" />
+				<input type="hidden" name="snum" value="${cart.snum}" />
+				<input type="hidden" name="paycart" value="${cart.pay_cart}" />
+				<tr>
+					<td class="product-close"><input type="checkbox" name="chkbox"
+						onClick="itemSum()" class="chkbox" value="${cart.pay_cart}"
+						disabled /></td>
+					<td>${cart.sname}</td>
+					<c:set var="itemStr" value="${cart.items}" />
+					<c:set var="itemStr" value="${fn:replace(itemStr, '!@#', ':')}" />
+					<c:set var="itemStr" value="${fn:replace(itemStr, '$%^', ',')}" />
+					<c:set var="itemStr"
+						value="${fn:substring(itemStr, 0, fn:length(itemStr)-1)}" />
+					<td class='item'>${itemStr}</td>
+					<td>${cart.pay_cart}</td>
+				</tr>
+			</c:forEach>
+		</table>
+
+		<input type="hidden" name="cart_seq" value="${cart.cart_seq}" /> 합계:<input
+			type="text" class="total-cart-p" id="total_sum" name="pay_cart"
+			value="" />
+
+	</div>
 
 
+	<div class="orderArea  ec-shop-ordererForm">
+		<div class="title">
+			<h3>주문 정보</h3>
+			<p class="required">
+				<img
+					src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+					alt="필수"> 필수입력사항
+			</p>
+		</div>
+		<div class="ec-base-table typeWrite">
+			<table border="1" summary="">
+				<caption>주문 정보 입력</caption>
+				<colgroup>
+					<col style="width: 139px;">
+					<col style="width: auto;">
+				</colgroup>
+				<!-- 국내 쇼핑몰 -->
+				<tbody class="address_form  ">
+					<tr>
+						<th scope="row">주문하시는 분 <img
+							src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+							alt="필수"></th>
+						<td><input type="hidden" name="id" value="${finalPay.id}" />
+							<input type="text" id="orderName" name="name"
+							value="${finalPay.name}" readonly /></td>
+					</tr>
+					<tr class="">
+						<th scope="row">주소 <img
+							src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+							alt="필수"></th>
+						<td><input type="text" id="sample6_postcode"
+							placeholder="${finalPay.userZipCode}" name="userZipCode"
+							value="${finalPay.userZipCode}"> <input type="button"
+							onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+							<input type="text" id="sample6_address" placeholder="주소"
+							name="userFirstAddr" value="${finalPay.userFirstAddr}"><br>
+							<input type="text" id="sample6_extraAddress" placeholder="참고항목"
+							name="userExtraAddr" value="${finalPay.userExtraAddr}"> <input
+							type="text" id="sample6_detailAddress" placeholder="상세주소"
+							name="userSecondAddr" value="${finalPay.userSecondAddr}"></td>
+					</tr>
+					<tr class="">
+						<th scope="row">휴대전화 <span class=""><img
+								src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+								alt="필수"></span>
+						</th>
+						<td><input type="text" id="orderpnum" name="orderpnum"
+							value="${finalPay.pnum}" /></td>
+					</tr>
+				</tbody>
+				<!-- 해외 쇼핑몰 -->
+				<tbody class="email ec-orderform-emailRow">
+					<tr>
+						<th scope="row">이메일 <img
+							src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+							alt="필수"></th>
+						<td><input type="text" name="email" value="${finalPay.email}" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-      </div>
-      
-      <div class="addr">
-         <h2>배송지 정보</h2>
-         <input id="useraddr"  fw-filter="" fw-label="1" fw-msg="" value="T" type="radio">
-         <label >주문자 정보와 동일</label><br>
-         받으시는 분:<input type="text" id="username" /><br>
-         주소:<input type="text" id="postcode"><br>
-            <input type="text" id="address" placeholder="주소" ><br>
-            <input type="text" id="extraAddress" placeholder="참고항목" ><br>
-            <input type="text" id="detailAddress" placeholder="상세주소"><br>
-         휴대전화:<input type="text" id="userpnum" ><br>
-            
-      </div>
+	<!-- 배송정보 -->
+	<div class="orderArea">
+		<div class="title">
+			<h3>배송 정보</h3>
+			<p class="required">
+				<img
+					src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+					alt="필수"> 필수입력사항
+			</p>
+		</div>
+		<div class="ec-base-table typeWrite">
+			<table border="1" summary="">
+				<caption>배송 정보 입력</caption>
+				<colgroup>
+					<col style="width: 139px;">
+					<col style="width: auto;">
+				</colgroup>
+				<!-- 비회원 결제 -->
+				<!-- 국내 배송지 정보 -->
+				<tbody class="">
+					<tr class="">
+						<th scope="row">배송지 선택</th>
+						<td>
+							<div class="address">
+								<input id="useraddr" fw-filter="" fw-label="1" fw-msg=""
+									value="T" type="radio">&nbsp;주문자 정보와 동일
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">받으시는 분 <img
+							src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+							alt="필수"></th>
+						<td><input type="text" id="username" /></td>
+					</tr>
+					<tr>
+						<th scope="row">주소 <img
+							src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+							alt="필수"></th>
+						<td><input type="text" id="postcode"><br> <input
+							type="text" id="address" placeholder="주소"><br> <input
+							type="text" id="extraAddress" placeholder="참고항목"><input
+							type="text" id="detailAddress" placeholder="상세주소"></td>
+					</tr>
 
-      <div class="bubble">
-         <h2>포인트 사용</h2>
-         버블사용:<input type="text" name="pp_bubble" id="paybubble" value="0" onchange="checkBubble()">원(사용가능 버블:<a>${finalPay.bubble}</a>)<br>
-        <div id="bubble_check"></div>
-         버블충전:<input tyPe="radio" value="10000" name="b_price"/>10000버블 <input tyPe="radio" value="30000" name="b_price"/>30000버블 <input tyPe="radio" value="50000" name="b_price"/>50000버블
-         <button type="button" id="bubbleBut">충전하기</button>
-      </div>
+					<tr class="">
+						<th scope="row">휴대전화 <span class=""><img
+								src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif"
+								alt="필수"></span>
+						</th>
+						<td><input type="text" id="userpnum"></td>
+					</tr>
 
-      <div class="pricechk">
-         <h2>결제 수단</h2>
-         
+				</tbody>
 
-      </div>
+			</table>
+		</div>
+	</div>
 
-      <div class="price">
-         <h2>최종 결제금액</h2>
-         상품금액:<input type="text" id="pricepay" name="orderprice"  value="" />원<br>
-         버블사용:<input type="text" id="p_bubble" name="bubble" value="0" readonly />원<br>
-         총 결제금액:<input type="text" id="finalprice" name="pay_price"  value=""readonly />원
-         
-      
-      </div>
-      
-      <div class="pricechk">
-        <h2>결제 수단</h2>
-         <!-- 등록카드 -->
-         <input tyPe="radio" name="usercard" id="user" value='a' />
-         <label >등록 카드</label><br>
-         <div class="card" style='display:none'>
-         <input type="hidden" name="cardchk" value="${finalPay.cardCheck}" />
-         <input type="text" name="com" value="${finalPay.cardCom}" />
-         <input type="text" name="com" value="${finalPay.cardNum}" />
-         </div>
-         <!-- 카카오페이 -->
-       <input tyPe="radio" name="usercard" id="userkakao" value='b'/>
-         <label >카카오페이</label><br>
-      </div>
-      <div class="form-check check_agree_policy">
-        <label class="form-check-label" for="check_agree_policy">
-          <input type="checkbox" id="check_agree_policy" class="form-check" autocomplete="off">
-          <span class="check-img"></span>
-          결제 진행 필수사항 동의
-        </label>
-      </div>
-      <div class="all_policy">
-        <div class="title">개인정보 제 3자 제공 및 결제대행 서비스 표준 이용약관</div>
-        <div class="opener">보기</div>
-      </div>
-      <button type="button" onclick="kakaopay();">결제하기</button>
-<!--      <input type="button" value="결제하기" onclick="kakao()"/>   -->
-   </form>
-     
-   <script>
+	<!-- 포인트결제 -->
+	<div class="orderArea">
+		<div class="title">
+			<h3>포인트사용</h3>
+		</div>
+	</div>
+	<div class="ec-base-table typeWrite">
+		<table border="1" summary="">
+			<colgroup>
+				<col style="width: 139px;">
+				<col style="width: auto;">
+			</colgroup>
+			<!-- 비회원 결제 -->
+			<!-- 국내 배송지 정보 -->
+			<tbody class="">
+				<tr class="">
+					<th scope="row">버블사용</th>
+					<td><input type="text" name="pp_bubble" id="paybubble"
+						value="0" onchange="checkBubble()">원(사용가능 버블:<a>${finalPay.bubble}</a>)
+					</td>
+				</tr>
+				<tr class="">
+					<th scope="row">버블충전 <span class=""></th>
+					<td><input tyPe="radio" value="10000" name="b_price" />10000버블
+						<input tyPe="radio" value="30000" name="b_price" />30000버블 <input
+						tyPe="radio" value="50000" name="b_price" />50000버블
+						<button type="button" id="bubbleBut">충전하기</button></td>
+				</tr>
+
+			</tbody>
+
+		</table>
+	</div>
+
+	<div class="title">
+		<h3>결제 예정 금액</h3>
+	</div>
+	<div class="totalArea">
+		<div class="ec-base-table typeList gBorder total">
+			<table border="1" summary="">
+				<caption>결제 예정 금액</caption>
+				<colgroup>
+					<col style="width: 33.33%">
+					<col style="width: 33.33%" class="">
+					<col style="width: 33.33%">
+				</colgroup>
+				<thead>
+					<tr>
+						<th scope="col"><strong>총 주문 금액</strong></th>
+						<th scope="col" class=""><strong>총 </strong><strong
+							id="total_addsale_text" class="">할인</strong><strong
+							id="plus_mark" class=""> 금액</strong></th>
+						<th scope="col"><strong>총 결제예정 금액</strong></th>
+					</tr>
+				</thead>
+				<tbody class="center">
+					<tr>
+						<td class="price"><div class="box txt16">
+								<strong><span id="total_order_price_view" class="txt23"><input
+										type="text" id="pricepay" name="orderprice" value="" /></span>원</strong> <span
+									class="displaynone"><span
+									id="total_order_price_ref_view"></span></span>
+							</div></td>
+						<td class="option "><div class="box txt16">
+								<strong>-</strong> <strong><span
+									id="total_sale_price_view" class="txt23"><input
+										type="text" id="p_bubble" name="bubble" value="0" readonly /></span>원</strong>
+								<span class="displaynone"><span
+									id="total_sale_price_ref_view"></span></span>
+							</div></td>
+						<td><div class="box txtBlack txt16">
+								<strong>=</strong> <strong><span
+									id="total_order_sale_price_view" class="txt23"><input
+										type="text" id="finalprice" name="pay_price" value="" readonly /></span>원</strong>
+								<span class="displaynone"><span
+									id="total_order_sale_price_ref_view"></span></span>
+							</div></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="title">
+		<h3>결제수단</h3>
+		<span class="txtBlack gIndent20 displaynone"> <input
+			type="checkbox" id="save_paymethod" name="save_paymethod" value=""
+			disabled=""><label for="save_paymethod">결제수단과 입력정보를
+				다음에도 사용</label>
+		</span>
+	</div>
+
+	<div class="payArea">
+		<div class="payment">
+			<div class="method">
+				<span class="ec-base-label"><input tyPe="radio"
+					name="usercard" id="user" value='a' /> <label>등록 카드</label></span>
+				<div class="card" style='display: none'>
+					<input type="hidden" name="cardchk" value="${finalPay.cardCheck}" />
+					<input type="text" name="com" value="${finalPay.cardCom}" /> <input
+						type="text" name="com" value="${finalPay.cardNum}" />
+				</div>
+
+				<span class="ec-base-label"><input tyPe="radio"
+					name="usercard" id="userkakao" value='b' /> <label>카카오페이</label></span> 
+			</div>
+
+		<div class="form-check check_agree_policy">
+			<label class="form-check-label" for="check_agree_policy"> <input
+				type="checkbox" id="check_agree_policy" class="form-check"
+				autocomplete="off"> <span class="check-img"></span> 결제 진행
+				필수사항 동의
+			</label>
+		</div>
+		<div class="all_policy">
+			<div class="title">개인정보 제 3자 제공 및 결제대행 서비스 표준 이용약관</div>
+			<div class="opener">보기</div>
+		</div>
+		<div class="ec-base-button gColumn">
+			<a href="#none" id="btn" class="btnSubmit sizeXL"
+				onclick="kakaopay();"><span class="">결제하기</span></a>
+		</div>
+		
+		<!--      <input type="button" value="결제하기" onclick="kakao()"/>   -->
+</form>
+
+<script>
       //들오오자마자 체크박스에 체크해주기
       var ck = "${cart}";
       if (ck == 'false') {

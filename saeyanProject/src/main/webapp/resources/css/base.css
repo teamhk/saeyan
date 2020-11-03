@@ -93,14 +93,11 @@ input.block,
 textarea.block,
 select.block{ width:100%;}
 
-input[type="radio"], 
+
 input[type="checkbox"] { display: inline-block; width:20px; height:20px; border:none;vertical-align:middle; -webkit-appearance:none; border-radius:0; margin:0 5px 0 0; padding:0; cursor: pointer; background:url(../images/element_radio.png) no-repeat 50% 0;}
 input[type="checkbox"] { border-radius:0; background:url(https://www.cleantopia.com/kr/images/element_check.png) no-repeat 50% 0;  }
-input[type="radio"]:checked{ background:url(../images/element_radio.png) no-repeat 50% 100%;  }
 input[type="checkbox"]:checked{background:url(https://www.cleantopia.com/kr/images/element_check.png) no-repeat 50% 100%; }
-input[type="radio"]:disabled { background:#e4e4e4;  border:#a7a7a7 1px solid;}
 input[type="checkbox"]:disabled{background:#e4e4e4;  border:#a7a7a7 1px solid;}
-input[type="radio"]:disabled:checked { background:#fff url(../images/element_radio_dis.png) no-repeat 50% 50%; }
 input[type="checkbox"]:disabled:checked { background:#fff url(../images/element_check_dis.png) no-repeat 50% 50%; }
 
 button{ border:0 none; background:none;}
@@ -118,8 +115,8 @@ label.radio{ margin-right:20px;}
 @media (max-width:640px) {
 	input[type="radio"], 
 	input[type="checkbox"] { display:inline-block; width:16px; height:16px;background:url(../images/element_radio.png) no-repeat 50% 0; background-size:16px auto;}
-	input[type="checkbox"] { border-radius:0; background:url(../images/element_check.png) no-repeat 50% 0; background-size:16px auto; }
-	input[type="radio"]:checked{ background:url(../images/element_radio.png) no-repeat 50% 100%; background-size:16px auto; }
+	input[type="checkbox"] { border-radius:0; background:url(../images/element_check.png) no-repeat 20% 0; background-size:16px auto; }
+	input[type="radio"]:checked{ background:url(/resources/images/element_radio.png) no-repeat 50% 0%; background-size:16px auto; }
 	input[type="checkbox"]:checked{background:url(../images/element_check.png) no-repeat 50% 100%; background-size:16px auto; }
 	input[type="radio"]:disabled { background:#e4e4e4;  border:#a7a7a7 1px solid;}
 	input[type="checkbox"]:disabled{background:#e4e4e4;  border:#a7a7a7 1px solid;}

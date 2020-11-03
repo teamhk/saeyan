@@ -181,9 +181,11 @@ img {
 				
 			</div>
 		<div class="box">
+		
+			
 				<span class="gRight"> <a href="/stores/map"
-					class="btnNormalFix sizeL">쇼핑계속하기</a>
-				</span> <a href="#none" id='order' class=" "><img
+					class="btnNormalFix sizeL">빨래계속하기</a>
+				</span> <a onclick='location.href="pay"' id='order' class=" "><img
 					src="/resources/images/btn_order_all.png" alt="구매하기" title=""></a>
 	</div>
 		</form>
@@ -202,25 +204,7 @@ img {
 </script>
 
 <%@ include file="../include/footer.jsp"%>
-				<!-- 총 상품금액 상세내역 레이어 -->
-				<div id="order_layer_detail" class="totalDetail">
-					<h3>총 상품금액 상세내역</h3>
-					<div class="content">
-						<p>49,000원</p>
-						<ul>
-							<li><strong>상품금액</strong><span></span></li>
-							<li class="displaynone"><strong>부가세</strong><span>0원</span>
-							</li>
-						</ul>
-					</div>
-					<div class="close">
-						<a href="#none" onclick="OrderLayer.offDiv('order_layer_detail');"><img
-							src="http://img.echosting.cafe24.com/skin/base_ko_KR/common/btn_close.png"
-							alt="닫기"></a>
-					</div>
-				</div>
-			</div>
-			
+				
 
 
 
