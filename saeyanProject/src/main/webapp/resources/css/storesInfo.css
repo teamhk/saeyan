@@ -2924,9 +2924,7 @@ html {
 	background: #fafafa
 }
 
-body, html {
-	height: 100%
-}
+
 
 #kakaoWrap {
 	position: relative;
@@ -3387,8 +3385,8 @@ body, html {
 }
 
 .cont_mapdetail {
-	width: 800px;
-	padding-top: 16px;
+	width: 850px;
+	padding-top: 45px;
 	margin: 0 auto
 }
 
@@ -3412,7 +3410,7 @@ body, html {
 
 .cont_essential {
 	position: relative;
-	border: 1px solid #ebebeb;
+	border: 2.5px solid #ebebeb;
 	background: #fff
 }
 

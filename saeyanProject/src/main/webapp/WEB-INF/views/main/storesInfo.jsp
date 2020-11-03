@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="../include/headerReal.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -13,7 +14,6 @@
 <%
 	StoreInfo StoreInfo = (StoreInfo) request.getAttribute("storeInfo");
 %>
-<%@ include file="../include/headerReal.jsp" %>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
@@ -211,9 +211,7 @@ $(document).ready(function() {
 
 
 <style type="text/css">/* global */
-#body{
-    background: #ffffff
-}
+
 .screen_out {
 	overflow: hidden;
 	position: absolute;
@@ -464,7 +462,6 @@ $(document).ready(function() {
 						</div>
 					</div>
 					
-					<strong class="screen_out">상세정보 퀵메뉴</strong>
 					<ul class="list_lnb">
 						
 						<li>2018-11-28 즐겨찾기 메뉴의 lst클래스 삭제 <a href="#none"
@@ -512,62 +509,7 @@ $(document).ready(function() {
 							
 										</ul>
 										</div>
-										<div class="place_share_container" id="place_share_container">
-											<div class="social_comm_p hide">
-												<div class="sns_comm_p share_layer">
-													<strong class="screen_out">SNS로 공유하기 펼쳐짐</strong>
-													<ul class="list_sns">
-														<li><a href="#none" class="link_sns"
-															data-handler="kakaotalk"> <span
-																class="img_social ico_sns_kt"> </span>카카오톡
-														</a></li>
-														<li><a href="#none" class="link_sns"
-															data-handler="kakaostory"> <span
-																class="img_social ico_sns_ks"> </span>카카오스토리
-														</a></li>
-														<li><a href="#none" class="link_sns"
-															data-handler="facebook"> <span
-																class="img_social ico_sns_fb"> </span>페이스북
-														</a></li>
-														<li><a href="#none" class="link_sns"
-															data-handler="twitter"> <span
-																class="img_social ico_sns_tw"> </span>트위터
-														</a></li>
-														<li><a href="#none" class="link_sns"
-															data-handler="mail"> <span
-																class="img_social ico_sns_mail"> </span>다음메일
-														</a></li>
-														<li><a href="#none" class="link_sns"
-															data-handler="daumcafe"> <span
-																class="img_social ico_sns_cafe"> </span>다음카페
-														</a></li>
-													</ul>
-													<div class="copyUrl">
-														<div class="sns_copyurl">
-															<a href="#none" class="link_copyurl"> <span
-																class="screen_out">현재페이지 URL복사</span> <span
-																class="txt_url">https://place.map.kakao.com/892584709</span>
-																<span class="txt_copy">URL복사</span>
-															</a>
-														</div>
-													</div>
-													<button class="btn_close">
-														<span class="img_social ico_close">공유목록 닫기</span>
-													</button>
-												</div>
-												<div class="sns_comm_p copyurl_layer hide">
-													<div class="inner_copyurl">
-														<p class="desc_copyurl">
-															주소가 복사되었습니다.<br>원하는곳에 붙여넣기(Ctrl+V)해주세요.
-														</p>
-														<button class="btn_close">
-															<span class="img_social ico_close">공유목록 닫기</span>
-														</button>
-													</div>
-												</div>
-											</div>
-										</div></li>
-								</ul>
+										
 
 								<a href="#none" class="link_bookmark " data-fid=""
 									data-logtarget="" data-logevent="info_pannel,favorite"> <span
@@ -609,18 +551,18 @@ $(document).ready(function() {
 												class="time_operation">00:00 ~ 24:00</span>
 
 										</span></li>
+										
+										
 									</ul>
 								</div>
 							</div>
 						</div>
 						<div class="placeinfo_default placeinfo_facility">
-							<h4 class="tit_facility">
+							<h4 class="tit_facility" style="font-size:14px;font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;">
 								<span class="ico_comm ico_installation"></span>전화번호
-								
 							</h4>
 							<ul class="list_facility">
-								<li><span class="txt_operation">${storeInfo.scontact}</span>
-								 
+								<li><span class="txt_operation">${storeInfo.scontact}</span></li>
 							</ul>
 								</div>
 							</div>
@@ -860,50 +802,14 @@ this.deselect = function (trgtGoodsId){
 		}); 
 	});	
 </script>
-
-
-
-						</div>
-						<span class="info_revise">업데이트 <span class="date_revise">2019.03.14.</span>
-							<span class="bg_bar">|</span> <a href="#" class="link_fiy"
-							data-fiytype="detail" data-logtarget=""
-							data-logevent="main_info,FIY">틀린정보 신고</a></span>
-					</div>
-				</div>
-				<div data-viewid="photoSection" data-root=""
-					class="cont_photo no_category">
-					<div class="particular_head">
-						<h3 class="tit_subject">사진</h3>
-
-						<div class="wrap_btn">
-							<a href="#none" class="link_enroll" data-fiytype="photo"
-								data-logtarget="" data-logevent="photo,add"> <span
-								class="ico_comm ico_photo"></span>사진등록
-							</a>
-						</div>
-					</div>
-					<div class="photo_area">
-						<ul class="list_photo">
-							<li class="">사진 2장 부터 클래스 size_l 추가 <a href="#none"
-								class="link_photo" data-pidx="0"
-								style="background-image: url('//img1.daumcdn.net/thumb/C640x320.q70/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocalfiy%2F2D6916B41D7C492EB7A93CEFC2F357AA')"
-								data-logtarget="" data-logevent="photo,photo_view"> <span
-									class="frame_g"></span>
-							</a>
-							</li>
-						</ul>
-
-					</div>
-					<br>
-
-
-
+<div data-viewid="comment" data-root="" class="cont_evaluation">
+    <div class="evaluation_review">
+        
 					<section id="container">
-						<h4 class="review">리뷰</h4>
+						<h4 class="review"  style="font-size:20px;font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif ,bord;">리뷰</h4>
 						<form role="form" method="get">
 							<table>
 								<tr>
-									<th>리뷰번호</th>
 									<th>내용</th>
 									<th>작성자</th>
 									<th>등록일</th>
@@ -945,7 +851,7 @@ this.deselect = function (trgtGoodsId){
 
 
 									<tr>
-<%-- 										<td><c:out value="${reviewList.r_no}" /></td> --%>
+										
 										<td><c:out value="${reviewList.r_content}" /></td>
 										<td><c:out value="${reviewList.w_id}" /></td>
 										<td><fmt:formatDate value="${reviewList.r_date}"
@@ -959,6 +865,65 @@ this.deselect = function (trgtGoodsId){
 					</section>
 
 				</div>
+        <ul class="list_evaluation">
+                <li data-id="971957" class="  platform_place" data-is-block="false">
+                    <!-- 2018-07-23 profile_info 추가 시작 -->
+                    <a href="javascript:void(0);" class="profile_info" data-ismy="false" data-userid="" data-username="" data-platform="kakaoplace" data-ori="">
+
+                            <span class="ico_comm ico_place "></span>
+                    </a>
+                  
+                    <!-- // 2018-07-23 profile_info 추가 끝 -->
+
+                    <div class="comment_info">
+                                <p class="txt_comment "><span>좋아요</span><button type="button" class="btn_fold">더보기</button></p>
+
+                            <div class="append_item">
+
+
+                                <em class="screen_out">작성일 : </em><span class="time_write">2017.12.21.</span>
+
+                                    <span class="bg_bar"></span>
+                                    <a href="javascript:void(0);" data-id="spamLink" data-commentid="971957" class="link_function" target="popup" data-platform="kakaoplace" data-logtarget="" data-logevent="point,list,report">
+                                        신고
+                                    </a>
+
+                            </div>
+                    </div>
+
+                </li>
+              
+        </ul>
+    </div>
+</div>
+<div data-viewid="photoSection" data-root=""
+					class="cont_photo no_category">
+					<div class="particular_head">
+						<h3 class="tit_subject">사진</h3>
+
+						<div class="wrap_btn">
+							<a href="#none" class="link_enroll" data-fiytype="photo"
+								data-logtarget="" data-logevent="photo,add"> <span
+								class="ico_comm ico_photo"></span>사진등록
+							</a>
+						</div>
+					</div>
+					<div class="photo_area">
+						<ul class="list_photo">
+							<li class="">사진 2장 부터 클래스 size_l 추가 <a href="#none"
+								class="link_photo" data-pidx="0"
+								style="background-image: url('//img1.daumcdn.net/thumb/C640x320.q70/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocalfiy%2F2D6916B41D7C492EB7A93CEFC2F357AA')"
+								data-logtarget="" data-logevent="photo,photo_view"> <span
+									class="frame_g"></span>
+							</a>
+							</li>
+						</ul>
+
+					</div>
+					<br>
+
+
+
 
 
 		
@@ -1033,7 +998,10 @@ this.deselect = function (trgtGoodsId){
 						</article>
 					</div>
 				</div>
-				</div>
+
+</div>
+</div>
+</div>
 				
 <%@ include file="../include/footer.jsp" %>
-
+				
