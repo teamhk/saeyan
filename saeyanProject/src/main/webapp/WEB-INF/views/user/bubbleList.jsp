@@ -5,7 +5,11 @@
 <%@ page import="com.hk.saeyan.dto.Bubble" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
+<%@ include file="../include/headerReal.jsp"%>
+
 <%@ include file="../include/sbheader.jsp"%>
+
+
 <div id="content-wrapper" class="d-flex flex-column">
 	<div id="content">
 		<div class="container-fluid">
@@ -21,8 +25,8 @@
 								<tr>
 									<th>충전금액</th>
 									<th>충전버블</th>
-									<th>버블잔량</th>
 									<th>버블사용</th>
+									<th>버블잔량</th>
 									<th>날짜</th>
 								</tr>
 							</thead>

@@ -15,8 +15,8 @@
 #wrap{ position:relative; overflow:visible; }
 
 #header{ position:relative; height:90px; padding:30px 0 0 180px; z-index:5; }
-#header h1.logo{ position:absolute; top:0px; left:50%; width:200px; margin-left:-800px; z-index:10;}
-#header h1.logo>a{ height:107px; display:block; text-indent:-9999px; background:url(/resources/images/logo.png) 20% 60% no-repeat; }
+#header h1.logo{ position:absolute; top:0px; left:50%; width:240px; margin-left:-800px; z-index:10;}
+#header h1.logo>a{ height:110px; display:block; text-indent:-9999px; background:url(/resources/images/logo.png) 20% 60% no-repeat; }
 #header .header-top{ position:absolute; top:20px; right:50%; height:24px; line-height:24px; margin-right:-550px; z-index:10;}
 #header .header-top>ul{ display:inline-block;}
 #header .header-top>ul>li{ position:relative; display:inline-block; }

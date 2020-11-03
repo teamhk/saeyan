@@ -212,7 +212,11 @@
 				</div>
 			</li>
 		</c:when>
-		<c:otherwise><a href="/auth/login">로그인</a></c:otherwise>
+		<c:otherwise>
+			<li class="gnb3">
+				<a href="/auth/login">로그인</a>
+			</li>
+		</c:otherwise>
 		</c:choose>
 		</ul>
 	</div>	
