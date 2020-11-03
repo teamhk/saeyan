@@ -11946,4 +11946,28 @@ html {
 	color: #ccc;
 	text-decoration: underline
 }
+
+[class^='btnSubmit'].point, a[class^='btnSubmit'].point {
+    background: #7d6c5b;
+}
+[class^='btnSubmit'], a[class^='btnSubmit'] {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 5px 12px;
+    border: 1px solid transparent;
+    border-radius: 0;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: normal;
+    text-decoration: none;
+    vertical-align: middle;
+    word-spacing: -0.5px;
+    letter-spacing: 0;
+    text-align: center;
+    white-space: nowrap;
+    color: #fff;
+    background-color: #222;
+}
+
+
 /*# sourceMappingURL=main.efe78505.css.map*/

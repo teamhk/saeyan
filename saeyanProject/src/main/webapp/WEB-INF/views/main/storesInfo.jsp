@@ -18,6 +18,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 	crossorigin="anonymous"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 <title>새얀</title>
 <script type="text/javascript">
 //팝업창 오픈하여 데이터 전송
@@ -498,7 +499,11 @@ $(document).ready(function() {
 							<div class="inner_place">
 								<span class="color_g txt_elocation">${storeInfo.sname}</span>
 								<h2 class="tit_location">${storeInfo.sname}</h2>
-								
+								<a
+										href="/stores/map"
+										class="link_place" data-logtarget=""
+										data-logevent="info_pannel,map_view"><span
+											class="ico_comm ico_storemap"></span>지도</a>
 								<strong class="screen_out">위치 정보 및 공유하기</strong>
 								<ul class="list_place">
 									<li><a
@@ -567,8 +572,10 @@ $(document).ready(function() {
 								</div>
 							</div>
 						</div>
-						<div class="placeinfo_default placeinfo_facility">
 						
+						
+						<div data-viewid="comment" data-root="" class="cont_evaluation">
+							<h4>주문하기</h4>
 							<select id="selGoods" name="selGoods" style="height: 40px;">
 								<option value=''>-[필수] 옵션을 선택해 주세요 -</option>
 								<c:set var="num" value="1" />
@@ -589,8 +596,12 @@ $(document).ready(function() {
 										type="hidden" value='N' name="c_check">
 
 								</div>
-							총금액:<input id="goodsTotAmt" name="pay_cart" value="0" readonly> 
-							<input type='button' value='구매하기' onclick="javascript:openPopup()" /> 
+							총 상품금액:<input id="goodsTotAmt" name="pay_cart" value="0" readonly>
+							<a href="#none" class="btnSubmit sizeM gFlex2 point " onclick="javascript:openPopup()" >
+                                <span id="btnBuy">ADD TO CART</span>
+                                
+                            </a>
+<!-- 							<input type='button' value='구매하기' onclick="javascript:openPopup()" />  -->
 								
 						
 							</form>
@@ -599,6 +610,7 @@ $(document).ready(function() {
 								<input type='hidden' value='${ppp.pname}' name='pname'>
 								<input type='hidden' value='${ppp.pprice}' name='pprice'>
 							</c:forEach>
+							</div>
 							
 <script>
 function Goods(){
@@ -659,33 +671,7 @@ this.deselect = function (trgtGoodsId){
 		
 	this.appendChoiceDiv = function(prmtObj){
 			var mimi="";
-// 			if(prmtObj.goodsId==="셔츠"){
-// 					mimi="Y1";
-// 				}else if(prmtObj.goodsId==="블라우스"){
-// 					mimi="B1";
-// 				}else if(prmtObj.goodsId==="티셔츠"){
-// 					mimi="T1";
-// 				}else if(prmtObj.goodsId==="맨투맨"){
-// 					mimi="M1";
-// 				}else if(prmtObj.goodsId==="바지"){
-// 					mimi="P1";
-// 				}else if(prmtObj.goodsId==="니트"){
-// 					mimi="K1";
-// 				}else if(prmtObj.goodsId==="자켓"){
-// 					mimi="J1";
-// 				}else if(prmtObj.goodsId==="코트"){
-// 					mimi="C1";
-// 				}else if(prmtObj.goodsId==="패딩"){
-// 					mimi="P2";
-// 				}else if(prmtObj.goodsId==="이불"){
-// 						mimi="D1";
-// 				}else if(prmtObj.goodsId==="신발"){
-// 					mimi="S1";
-// 				}else if(prmtObj.goodsId==="커튼"){
-// 					mimi="C2";
-// 				}else if(prmtObj.goodsId==="가방"){
-// 					mimi="B2";
-// 				}
+
 			
 			
 			var innerHtml = "";
@@ -696,7 +682,7 @@ this.deselect = function (trgtGoodsId){
 			innerHtml += '	<li>'+prmtObj.goodsprc+'원</li>';
 			innerHtml += '	<li><button type="button" id="" class="add" name="" onclick="goods.minus(\''+prmtObj.goodsId+'\');">-</button></li>';
 			innerHtml += '	<li><button type="button" id="" class="remove" name="" onclick="goods.plus(\''+prmtObj.goodsId+'\');">+</button></li>';
-			innerHtml += '	<li>개수:<input type="text" id="input_cnt_'+prmtObj.goodsId+'" name="mimi" value="0" readonly/>'
+			innerHtml += '	<li>개수:<span class="count"><button type="button" class="remove" name="" onclick="goods.plus(\''+prmtObj.goodsId+'\');"></button><input type="text" id="input_cnt_'+prmtObj.goodsId+'" name="mimi" value="0" readonly/>'
 			innerHtml += '	<li>가격:<input type="text" id="input_sumAmt_'+prmtObj.goodsId+'" name="" value="0" readonly/>'
 			innerHtml += '	<li><button type="button" id="" class="remove" name="" onclick="goods.deselect(\''+prmtObj.goodsId+'\');">제거</button></li>';
 			innerHtml += '</ul>';
@@ -757,42 +743,14 @@ this.deselect = function (trgtGoodsId){
 	var goods = new Goods();
 	
 	
-	//${product};
-// 	for(Product pro : ${product}){
-<%-- 		<%for(Product ppp : pro){%> --%>
-<%-- 		Product abc = <%=pro%>.shift(); --%>
-// 		console.log(abc);
-<%-- 	<%}%> --%>
-// 	goods.arrAllGoods.push({goodsId:"셔츠",goodsprc:"1500",goodsNm:"셔츠",cnt:0});
 	
-// 	List<Product> product = $("#product").val();
-// 	for(var i=0;i<product.length;i++){
-// 	var pname = new Array(); 
-// 	var pprice = new Array();
 		for(var i=0;i<$('input[name="pname"]').length;i++){
 // 			pname.push($('input[name="pname"]').eq(i).val());
 // 			pprice.push($('input[name="pprice"]').eq(i).val());
     		goods.arrAllGoods.push({goodsId:$('input[name="pname"]').eq(i).val(),goodsprc:$('input[name="pprice"]').eq(i).val(),goodsNm:$('input[name="pname"]').eq(i).val(),cnt:0});  
 			
 		}
-// 		console.log(pname);
-// 		console.log(pprice);
-		
-// 	}
-	
-// 	goods.arrAllGoods.push({goodsId:"셔츠",goodsprc:"1500",goodsNm:"셔츠",cnt:0});
-//     goods.arrAllGoods.push({goodsId:"블라우스",goodsprc:"2000",goodsNm:"블라우스",cnt:0});
-// 	goods.arrAllGoods.push({goodsId:"티셔츠",goodsprc:"2000",goodsNm:"티셔츠",cnt:0});  
-// 	goods.arrAllGoods.push({goodsId:"맨투맨",goodsprc:"2000",goodsNm:"맨투맨",cnt:0});
-// 	goods.arrAllGoods.push({goodsId:"바지",goodsprc:"2000",goodsNm:"바지",cnt:0});
-// 	goods.arrAllGoods.push({goodsId:"니트",goodsprc:"2000",goodsNm:"니트",cnt:0});
-// 	goods.arrAllGoods.push({goodsId:"자켓",goodsprc:"2000",goodsNm:"자켓",cnt:0});
-// 	goods.arrAllGoods.push({goodsId:"코트",goodsprc:"2000",goodsNm:"코트",cnt:0});
-// 	goods.arrAllGoods.push({goodsId:"패딩",goodsprc:"2000",goodsNm:"패딩",cnt:0});
-// 	goods.arrAllGoods.push({goodsId:"이불",goodsprc:"2000",goodsNm:"이불",cnt:0});
-// 	goods.arrAllGoods.push({goodsId:"신발",goodsprc:"2000",goodsNm:"신발",cnt:0});
-// 	goods.arrAllGoods.push({goodsId:"커튼",goodsprc:"2000",goodsNm:"커튼",cnt:0});
-// 	goods.arrAllGoods.push({goodsId:"가방",goodsprc:"2000",goodsNm:"가방",cnt:0});
+
 	 
 	$(function(){
 		$('#selGoods').change('click',function(){
@@ -802,9 +760,36 @@ this.deselect = function (trgtGoodsId){
 		}); 
 	});	
 </script>
+
+
+<div data-viewid="photoSection" data-root=""
+					class="cont_photo no_category">
+					<div class="particular_head">
+						<h3 class="tit_subject">사진</h3>
+
+						<div class="wrap_btn">
+							<a href="#none" class="link_enroll" data-fiytype="photo"
+								data-logtarget="" data-logevent="photo,add"> <span
+								class="ico_comm ico_photo"></span>사진등록
+							</a>
+						</div>
+					</div>
+					<div class="photo_area">
+						<ul class="list_photo">
+							<li class="">사진 2장 부터 클래스 size_l 추가 <a href="#none"
+								class="link_photo" data-pidx="0"
+								style="background-image: url('//img1.daumcdn.net/thumb/C640x320.q70/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocalfiy%2F2D6916B41D7C492EB7A93CEFC2F357AA')"
+								data-logtarget="" data-logevent="photo,photo_view"> <span
+									class="frame_g"></span>
+							</a>
+							</li>
+						</ul>
+
+					</div>
+					
+</div>
 <div data-viewid="comment" data-root="" class="cont_evaluation">
-    <div class="evaluation_review">
-        
+    <div class="evaluation_review"> 
 					<section id="container">
 						<h4 class="review"  style="font-size:20px;font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif ,bord;">리뷰</h4>
 						<form role="form" method="get">
@@ -865,68 +850,9 @@ this.deselect = function (trgtGoodsId){
 					</section>
 
 				</div>
-        <ul class="list_evaluation">
-                <li data-id="971957" class="  platform_place" data-is-block="false">
-                    <!-- 2018-07-23 profile_info 추가 시작 -->
-                    <a href="javascript:void(0);" class="profile_info" data-ismy="false" data-userid="" data-username="" data-platform="kakaoplace" data-ori="">
-
-                            <span class="ico_comm ico_place "></span>
-                    </a>
-                  
-                    <!-- // 2018-07-23 profile_info 추가 끝 -->
-
-                    <div class="comment_info">
-                                <p class="txt_comment "><span>좋아요</span><button type="button" class="btn_fold">더보기</button></p>
-
-                            <div class="append_item">
-
-
-                                <em class="screen_out">작성일 : </em><span class="time_write">2017.12.21.</span>
-
-                                    <span class="bg_bar"></span>
-                                    <a href="javascript:void(0);" data-id="spamLink" data-commentid="971957" class="link_function" target="popup" data-platform="kakaoplace" data-logtarget="" data-logevent="point,list,report">
-                                        신고
-                                    </a>
-
-                            </div>
-                    </div>
-
-                </li>
-              
-        </ul>
     </div>
-</div>
-<div data-viewid="photoSection" data-root=""
-					class="cont_photo no_category">
-					<div class="particular_head">
-						<h3 class="tit_subject">사진</h3>
-
-						<div class="wrap_btn">
-							<a href="#none" class="link_enroll" data-fiytype="photo"
-								data-logtarget="" data-logevent="photo,add"> <span
-								class="ico_comm ico_photo"></span>사진등록
-							</a>
-						</div>
-					</div>
-					<div class="photo_area">
-						<ul class="list_photo">
-							<li class="">사진 2장 부터 클래스 size_l 추가 <a href="#none"
-								class="link_photo" data-pidx="0"
-								style="background-image: url('//img1.daumcdn.net/thumb/C640x320.q70/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocalfiy%2F2D6916B41D7C492EB7A93CEFC2F357AA')"
-								data-logtarget="" data-logevent="photo,photo_view"> <span
-									class="frame_g"></span>
-							</a>
-							</li>
-						</ul>
-
-					</div>
-					<br>
 
 
-
-
-
-		
 				<div>
 					<button onClick="javascript:goDetail('테스트');">문의글 작성하기</button>
 					<div style="height: 1000px;"></div>
@@ -945,13 +871,6 @@ this.deselect = function (trgtGoodsId){
 							<form name="writeForm" method="post" action="/user/schatW">
 								<table>
 									<tbody>
-									
-									<tr>
-											<td><label for="writer">업체명</label><input type="text"
-												id="sname" name="sname" placeholder="ID가져올 예정"
-												value="${storeInfo.sname}" readOnly /></td>
-										<tr>
-									
 
 										<tr>
 											<td><label for="content">제목</label> <textarea
@@ -999,9 +918,6 @@ this.deselect = function (trgtGoodsId){
 					</div>
 				</div>
 
-</div>
-</div>
-</div>
 				
 <%@ include file="../include/footer.jsp" %>
 				
