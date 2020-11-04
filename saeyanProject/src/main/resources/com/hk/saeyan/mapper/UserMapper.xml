@@ -70,7 +70,7 @@
 	</select>
 
 	<select id="orderList" resultType="com.hk.saeyan.dto.OrderList">
-		select m.id,ordernum from members m,orderlist o where m.id=o.id and
+		select m.id, o.ordernum, o.sname, o.pay_date from members m,orderlist o where m.id=o.id and
 		m.id=#{id}
 
 	</select>

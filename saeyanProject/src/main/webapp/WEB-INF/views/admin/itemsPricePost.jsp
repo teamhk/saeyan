@@ -1,17 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>가격표 정보 수정 결과</title>
-</head>
-<body>
-<h1>가격표 정보 수정 결과</h1><br>
-<b>정상적으로 수정되었습니다.</b>
-<a href="/admin/price">리스트로 이동하려면 누르세요</a>
+<%@ include file="../include/headerReal.jsp" %>
+<title>가격표 정보수정 결과</title>
+<div id="container">
+	<div id="content" class="brd-wr">
+		<div class="tit-area">
+			<h1>가격표 정보수정 결과</h1>
+		</div>
+		<div class="brd-bx">
+			<div class="inner">
+				<h3 class="h3-tit fir">가격이 정상적으로 수정되었습니다.</h3>
+			</div>
+		</div>
+	</div>
+</div>
 <script>
-	setTimeout( function() { window.location='/admin/price';},3000);
+	setTimeout( function() { window.location='/admin/price';},1000);
 </script>
 </body>
 </html>

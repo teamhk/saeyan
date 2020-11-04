@@ -7,19 +7,15 @@
 <%
 	OrderProcess orderPro = (OrderProcess) request.getAttribute("myOrderList");
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+<%@ include file="../include/headerReal.jsp"%>
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 	crossorigin="anonymous"></script>
 <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-<title>주문 상세 정보</title>
 <style type="text/css">
-.tdn {
-	cursor: pointer;
-} /* 마우스 포인터가 손가락 모양으로 바꿈*/
+/* .tdn { */
+/* 	cursor: pointer; */
+/* } /* 마우스 포인터가 손가락 모양으로 바꿈*/ */
 
 
 /*-- POPUP common style S ======================================================================================================================== --*/
@@ -99,6 +95,12 @@
 	color: red;
 }
 /*-- POPUP common style E --*/
+
+.btn-default2 {
+    background: rgba(100,100,100,0);
+    color: #333;
+    border: #333 1px solid;
+}
 </style>
 
 <script>
@@ -223,64 +225,206 @@
 
 	
 </script>
+<div id="container">
+	<div id="content" class="brd-wr">
+		<div class="tit-area">
+			<h2>주문 상세정보</h2>
+		</div>
+		<div class="brd-bx">
+			<div class="inner">
+				<h3 class="h3-tit fir">
+					<span>주문 상세정보</span>
+				</h3>
+				<div class="write-bx">
+					<div class="rows">
+						<span class="tit-tx m-4">
+							<b>주문번호</b>
+						</span>
+						<div class="con-tx m-8">
+							<c:set var="itemStr" value="${myOrderList.items}" />
+							<c:set var="itemStr" value="${fn:replace(itemStr, '!@#', ':')}" />
+							<c:set var="itemStr" value="${fn:replace(itemStr, '$%^', '개 ')}" />
+							<c:set var="itemStr" value="${fn:substring(itemStr, 0, fn:length(itemStr)-1)}" />
+							<span class="input p-4 m-12" style="font-size: 20px;">${myOrderList.orderNum}</span>
+							<input type='hidden' id="ordernum" value='${myOrderList.orderNum}' readonly>
+						</div>
+					</div>
+					<div class="rows">
+						<span class="tit-tx m-4">
+							<b>아이디</b>
+						</span>
+						<div class="con-tx m-8">
+							<span class="input p-4 m-12" style="font-size: 20px;">${myOrderList.id}</span>
+							<input type='hidden' id="userid" value='${myOrderList.id}'>
+						</div>
+					</div>
+					<div class="rows">
+						<span class="tit-tx m-4">
+							<b>품목</b>
+						</span>
+						<div class="con-tx m-8">
+							<span class="input p-4 m-12" style="font-size: 20px;">${itemStr}</span>
+							<input type='hidden' class='item' value='${itemStr}'>
+						</div>
+					</div>
+					<div class="rows">
+						<span class="tit-tx m-4">
+							<b>결제금액</b>
+						</span>
+						<div class="con-tx m-8">
+							<span class="input p-4 m-12" style="font-size: 20px;">${myOrderList.pay_price}원</span>
+							<input type='hidden' id="price" value='${myOrderList.pay_price}'>
+						</div>
+					</div>
+					<div class="rows">
+						<span class="tit-tx m-4">
+							<b>글제일</b>
+						</span>
+						<div class="con-tx m-8">
+							<span class="input p-4 m-12" style="font-size: 20px;"><fmt:formatDate value='${myOrderList.pay_date}' type='both' pattern='yyyy.MM.dd(E)(a)hh:mm:ss' /></span>
+						</div>
+					</div>
+					<div class="rows">
+						<span class="tit-tx m-4">
+							<b>세탁 진행상황</b>
+						</span>
+						<div class="con-tx m-8">
+							<%
+								String process = "";
+							%>
+							<c:choose>
+							
+								<c:when test="${myOrderList.refundDate ne null}">
+									<%
+										process = "환불완료";
+									%>
+								</c:when>
+							
+								<c:when test="${myOrderList.finish ne null}">
+									<%
+										process = "배달완료";
+									%>
+								</c:when>
+								<c:when test="${myOrderList.wash ne null}">
+									<%
+										process = "세탁중";
+									%>
+								</c:when>
+								<c:when test="${myOrderList.pick ne null}">
+									<%
+										process = "수거완료";
+									%>
+								</c:when>
+								<c:when test="${myOrderList.ok ne null}">
+									<%
+										process = "접수완료";
+									%>
+								</c:when>
+								<c:when test="${myOrderList.wait ne null}">
+									<%
+										process = "접수중";
+									%>
+								</c:when>
+							</c:choose>
+							<span class="input p-4 m-12" style="font-size: 20px;"><%=process%></span>
+							<input type='hidden' value='<%=process%>' class='pro' readonly><br>
+							<input type="hidden" id="refun" value="${myOrderList.ok }" />
+							<input type="hidden" id="bub" value="${myOrderList.bubble }" />
+						</div>
+					</div>
+				</div>
+				<div class="btn-box">
+				<button type="button" id="refund" class="btn btn-default2 btn-lg">환불하기</button>
+				<button class='tdn btn btn-default2 btn-lg'>전화면으로</button>
+<!-- 				<div id='detail'></div>	 -->
+					<!--Popup Start -->
+	<c:choose>
+		<c:when test="${myOrderList.finish ne null && myOrderList.r_check eq 'N'  }">
 
-</head>
-<body>
-	<c:set var="itemStr" value="${myOrderList.items}" />
-	<c:set var="itemStr" value="${fn:replace(itemStr, '!@#', ':')}" />
-	<c:set var="itemStr" value="${fn:replace(itemStr, '$%^', '개 ')}" />
-	<c:set var="itemStr"
-		value="${fn:substring(itemStr, 0, fn:length(itemStr)-1)}" />
-	<div id='maindiv'>
-		주문번호:<input type='text' id="ordernum" value='${myOrderList.orderNum}'><br>
-		ID:<input type='text' id="userid" value='${myOrderList.id}'><br> 
-		품목:<input type='text' class='item' value='${itemStr}'><br> 
-		결제금액:<input type='text' id="price" value='${myOrderList.pay_price}'><br>
-		 결제일:<fmt:formatDate value='${myOrderList.pay_date}' type='both' pattern='yyyy.MM.dd(E)(a)hh:mm:ss' />
-		<br> 진행 상황:
-		<%
-			String process = "";
-		%>
-		<c:choose>
-		
-			<c:when test="${myOrderList.refundDate ne null}">
-				<%
-					process = "환불완료";
-				%>
-			</c:when>
-		
-			<c:when test="${myOrderList.finish ne null}">
-				<%
-					process = "배달완료";
-				%>
-			</c:when>
-			<c:when test="${myOrderList.wash ne null}">
-				<%
-					process = "세탁중";
-				%>
-			</c:when>
-			<c:when test="${myOrderList.pick ne null}">
-				<%
-					process = "수거완료";
-				%>
-			</c:when>
-			<c:when test="${myOrderList.ok ne null}">
-				<%
-					process = "접수완료";
-				%>
-			</c:when>
-			<c:when test="${myOrderList.wait ne null}">
-				<%
-					process = "접수중";
-				%>
-			</c:when>
-		</c:choose>
-		<input type='text' value='<%=process%>' class='pro' readonly><br>
-		<input type="hidden" id="refun" value="${myOrderList.ok }" />
-		<input type="hidden" id="bub" value="${myOrderList.bubble }" />
+
+			<button onClick="javascript:goDetail('테스트');" class="btn btn-blue btn-lg">리뷰 작성하기</button>
+			
+			<div style="height: 1000px;"></div>
+
+			<!-- 팝업뜰때 배경 -->
+			<div id="mask"></div>
+
+
+			<div id="layerbox" class="layerpop"
+				style="width: 700px; height: 350px;">
+				<article class="layerpop_area">
+					<div class="title">리뷰 작성하기</div>
+					<a href="javascript:popupClose();" class="layerpop_close"
+						id="layerbox_close"></a> <br>
+
+
+					<form name="writeForm" method="post" action="/review/rWrite">
+						<table>
+							<tbody>
+							
+								<tr>
+									<td><label for="title">업체명</label><input type="text"
+										id="orderNum" name="sname" class="chk" title="주문번호를 입력하세요"
+										value="${myOrderList.sname}" placeholder="주문번호를 입력하세요"  readOnly/></td>
+								</tr>
+
+								<tr>
+									<td><label for="title">주문번호</label><input type="text"
+										id="orderNum" name="orderNum" class="chk" title="주문번호를 입력하세요"
+										value="${myOrderList.orderNum}" placeholder="주문번호를 입력하세요" /></td>
+								</tr>
+								<tr>
+									<td><label for="content">내용</label> <textarea
+											id="r_content" name="r_content" class="chk"
+											title="내용을 입력하세요." placeholder="내용을 입력해주세요"></textarea></td>
+								</tr>
+								<tr>
+									<td><label for="writer">작성자</label><input type="text"
+										id="writer" name="w_id" placeholder="ID가져올 예정"
+										value="${loginMember.id}" readOnly/></td>
+								<tr>
+								<tr>
+									<td><label for="writer"></label><input type="hidden"
+										id="snum" name="snum" value='${myOrderList.snum}'
+										placeholder="사업자번호 가져올예정" /></td>
+								<tr>
+								<tr>
+									<td><label for="star">별점</label> <input type="hidden"
+										name="star" id="point" title="별점을 선택해주세요" class="chk" />
+										<div class="starRev" title="별점을 선택해주세요">
+											<span class="star1 on" id="star1" data-value="1">★</span> <span
+												class="star2 on" id="star2" data-value="2">★</span> <span
+												class="star3 on" id="star3" data-value="3">★</span> <span
+												class="star4 on" id="star4" data-value="4">★</span> <span
+												class="star5 on" id="star5" data-value="5">★</span>
+
+										</div>
+								<tr>
+									<td>
+										<button type="submit" class="write_btn">작성하기</button>
+									</td>
+								</tr>
+
+						
+
+							</tbody>
+						</table>
+					</form>
+
+				</article>
+			</div>
+
+			<!--Popup End -->
+
+		</c:when>
+	</c:choose>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
 	<button type="button" id="refund" >환불하기</button>
 	<button class='tdn'>전화면으로</button>
-	</div>
 	<div id='detail'></div>
 
 	<!--Popup Start -->
@@ -288,7 +432,7 @@
 		<c:when test="${myOrderList.finish ne null && myOrderList.r_check eq 'N'  }">
 
 
-			<button onClick="javascript:goDetail('테스트');">리뷰 작성하기</button>
+			<button onclick="javascript:goDetail('테스트');">리뷰 작성하기</button>
 			<div style="height: 1000px;"></div>
 
 			<!-- 팝업뜰때 배경 -->

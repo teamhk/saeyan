@@ -175,7 +175,8 @@
 							<li><a href="/user/review">리뷰 관리</a></li>
 						</ul>
 						<ul>
-							<li><a href="/user/cChat">문의글 관리</a></li>
+							<li><a href="/user/cChatL">관리자 문의</a></li>
+							<li><a href="/user/schat">업체 문의</a></li>
 							<li><a href="/auth/logout">로그아웃</a></li>
 							<li><a href="/user/delet">회원탈퇴</a></li>
 						</ul>
@@ -215,7 +216,6 @@
 		<c:otherwise>
 			<li class="gnb3">
 				<a href="/auth/login">로그인</a>
-			</li>
 		</c:otherwise>
 		</c:choose>
 		</ul>
