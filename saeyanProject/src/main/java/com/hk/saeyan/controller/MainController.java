@@ -23,6 +23,13 @@ public class MainController {
 		return "main/use";
 	}
 	
+	@GetMapping("/company")
+	public String company() {
+		
+		
+		return "main/company";
+	}
+	
 	
 	@GetMapping("/price")
 	public String price(Product product,Model model) {
