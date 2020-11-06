@@ -31,7 +31,7 @@
 	margin-bottom: 5% !important;
 }
 </style>	
-<div id="content-wrapper" class="d-flex flex-column">
+<div id="content-wrapper" class="d-flex flex-column" style="height: 1100px;">
 	<div id="content" class="mg">
 		<div class="container-fluid">
 			<h1 class="h3 mb-2 text-gray-800 ml-20" style="font-size: 5em;">내가 작성한 리뷰</h1>
@@ -51,7 +51,7 @@
 										<th>내용</th>
 										<th>작성자</th>
 										<th>등록일</th>
-										<th>사업자번호</th>
+<!-- 										<th>업체명</th> -->
 										<th>별점</th>
 									</tr>
 										<c:forEach items="${reviewListU}" var="reviewListU">
@@ -83,7 +83,7 @@
 										<td><c:out value="${reviewListU.r_content}" /></td>
 										<td><c:out value="${reviewListU.w_id}" /></td>
 										<td><fmt:formatDate value="${reviewListU.r_date}" pattern="yyyy-MM-dd" /></td>
-										<td><c:out value="${reviewListU.snum}" /></td>	
+<%-- 										<td><c:out value="${reviewListU.sname}" /></td>	 --%>
 										<td class="starcolor"><c:out value="${star1}" /></td>	
 									</tr>
 									</c:forEach>
@@ -96,79 +96,5 @@
 		</div>
 	</div>
 </div>
-
-<!-- 	<h1>리뷰보기</h1> -->
-
-
-<!-- 	<form action='updateOne' name='storeform' method='post' id='storeform'> -->
-<%-- 		ID :<input type='text' name='id' value=${loginMember.id } readonly><br> --%>
-<!-- 		<!--${loginMember.name }--> -->
-
-<!-- 	</form> -->
-
-<!-- 	<section id="container"> -->
-<!-- 		<form role="form" method="get"> -->
-<!-- 			<table> -->
-<!-- 				<tr> -->
-<!-- 					<th>리뷰번호</th> -->
-<!-- 					<th>주문번호</th> -->
-<!-- 					<th>내용</th> -->
-<!-- 					<th>작성자</th> -->
-<!-- 					<th>등록일</th> -->
-<!-- 					<th>사업자번호</th> -->
-<!-- 					<th>별점</th> -->
-<!-- 				</tr> -->
-
-<%-- 				<c:forEach items="${reviewListU}" var="reviewListU"> --%>
-<%-- 				<c:set var="star0" value="${reviewListU.star}" /> --%>
-<%-- 									<c:choose> --%>
-<%-- 										<c:when test="${star0 eq '1' }"> --%>
-<%-- 											<c:set var="star1" value="${fn:replace(star0, '1', '★' ) }" /> --%>
-<%-- 										</c:when> --%>
-
-<%-- 										<c:when test="${star0 eq '2' }"> --%>
-<%-- 											<c:set var="star1" value="${fn:replace(star0, '2', '★★')  }" /> --%>
-<%-- 										</c:when> --%>
-
-
-<%-- 										<c:when test="${star0 eq '3' }"> --%>
-<%-- 											<c:set var="star1" value="${fn:replace(star0, '3', '★★★' ) }" /> --%>
-<%-- 										</c:when> --%>
-
-
-<%-- 										<c:when test="${star0 eq '4' }"> --%>
-<%-- 											<c:set var="star1" --%>
-<%-- 												value="${fn:replace(star0, '4', '★★★★')  }" /> --%>
-<%-- 										</c:when> --%>
-
-
-<%-- 										<c:when test="${star0 eq '5' }"> --%>
-
-<%-- 											<c:set var="star1" --%>
-<%-- 												value="${fn:replace(star0, '5', '★★★★★')  }" /> --%>
-<%-- 										</c:when> --%>
-
-
-<%-- 									</c:choose> --%>
-				
-				
-<!-- 					<tr> -->
-<%-- 						<td><c:out value="${reviewListU.r_no}" /></td> --%>
-<%-- 						<td><c:out value="${reviewListU.orderNum}" /></td> --%>
-<%-- 						<td><c:out value="${reviewListU.r_content}" /></td> --%>
-<%-- 						<td><c:out value="${reviewListU.w_id}" /></td> --%>
-<%-- 						<td><fmt:formatDate value="${reviewListU.r_date}" --%>
-<%-- 								pattern="yyyy-MM-dd" /></td> --%>
-<%-- 						<td><c:out value="${reviewListU.snum}" /></td>	 --%>
-<%-- 						<td class="starcolor"><c:out value="${star1}" /></td>	 --%>
-<!-- 					</tr> -->
-<%-- 				</c:forEach> --%>
-
-<!-- 			</table> -->
-<!-- 		</form> -->
-<!-- 	</section> -->
-<script>
-	window.onload = function() {
-</script>
-</body>
-</html>
+</div>
+<%@ include file="../include/footerNoJS.jsp"%>

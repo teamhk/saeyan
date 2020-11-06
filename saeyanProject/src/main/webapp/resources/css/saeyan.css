@@ -92,7 +92,7 @@
 #footer .footer-link ul li a.on{ }
 #footer .footer-link ul li a:after{ content:""; position:absolute; top:0; left:0; top:50%; left:0; margin-top:-5px; width:1px; height:10px; background-color:#eaeaea; display:block;}
 #footer .footer-link ul li:first-child a:after{ display:none;}
-#footer .footer-wrap{ position:relative; margin:0 auto; width:1100px; padding:35px 0 35px 245px; color:#898989; background:url(../images/footer_logo.png) 0 40px no-repeat; font-size:13px; } 
+#footer .footer-wrap{ position:relative; margin:0 auto; width:1100px; padding:35px 0 35px 245px; color:#898989; background:url(../images/logo.png) 0 40px no-repeat; font-size:13px; } 
 #footer .footer-wrap .copy{ font-family:'Roboto'; }
 #footer .footer-wrap p span{ position:relative; display:inline-block; padding:0 10px 0 0; margin-right:10px;}
 #footer .footer-wrap p span:after{ content:""; position:absolute; display:block; background-color:#eaeaea; width:1px; height:10px; top:50%; right:0; margin-top:-5px;}
